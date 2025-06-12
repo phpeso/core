@@ -25,10 +25,10 @@ final class ArrayService implements CurrentExchangeRateServiceInterface, Histori
     {
         return Decimal::init(match (true) {
             $request instanceof CurrentExchangeRateRequest
-                => $this->currentRates[$request->toCurrency][$request->fromCurrency]
+                => $this->currentRates[$request->baseCurrency][$request->quoteCurrency]
                     ?? throw new ConversionRateNotFoundException(),
             $request instanceof HistoricalExchangeRateRequest
-                => $this->historicalRates[$request->date->toString()][$request->toCurrency][$request->fromCurrency]
+                => $this->historicalRates[$request->date->toString()][$request->baseCurrency][$request->quoteCurrency]
                     ?? throw new ConversionRateNotFoundException(),
         });
     }

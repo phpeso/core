@@ -7,8 +7,8 @@ namespace Peso\Core\Requests;
 final readonly class CurrentExchangeRateRequest
 {
     public function __construct(
-        public string $fromCurrency,
-        public string $toCurrency,
+        public string $baseCurrency,
+        public string $quoteCurrency,
     ) {
     }
 }
