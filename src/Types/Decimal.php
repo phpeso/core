@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Peso\Core\Types;
 
+use BcMath\Number;
+use Brick\Math\BigDecimal;
 use ValueError;
 
 final readonly class Decimal
@@ -16,12 +18,12 @@ final readonly class Decimal
         }
     }
 
-    public static function init(string|Decimal $value): self
+    public static function init(string|Decimal|Number|BigDecimal $value): self
     {
         if ($value instanceof Decimal) {
             return $value;
         }
 
-        return new Decimal($value);
+        return new Decimal((string)$value);
     }
 }

@@ -15,5 +15,8 @@ final readonly class HistoricalExchangeRateRequest
     ) {
     }
 
-
+    public function invert(): self
+    {
+        return new self($this->quoteCurrency, $this->baseCurrency, $this->date);
+    }
 }

@@ -9,7 +9,7 @@ use Peso\Core\Requests\CurrentExchangeRateRequest;
 use Peso\Core\Requests\HistoricalExchangeRateRequest;
 use Peso\Core\Types\Decimal;
 
-final class ArrayService implements CurrentExchangeRateServiceInterface, HistoricalExchangeRateServiceInterface
+final readonly class ArrayService implements CurrentExchangeRateServiceInterface, HistoricalExchangeRateServiceInterface
 {
     /**
      * @param array<string, array<string, string|Decimal>> $currentRates

@@ -11,4 +11,9 @@ final readonly class CurrentExchangeRateRequest
         public string $quoteCurrency,
     ) {
     }
+
+    public function invert(): self
+    {
+        return new self($this->quoteCurrency, $this->baseCurrency);
+    }
 }
