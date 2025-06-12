@@ -1,0 +1,15 @@
+{
+    "name": "peso/core",
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Peso\\Core\\": "src"
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "arokettu/date": "^2.0"
+    }
+}
