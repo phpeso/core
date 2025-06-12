@@ -16,7 +16,7 @@ final readonly class NullService implements CurrentExchangeRateServiceInterface,
         throw new ConversionRateNotFoundException();
     }
 
-    public function supports(CurrentExchangeRateRequest|HistoricalExchangeRateRequest $query): bool
+    public function supports(CurrentExchangeRateRequest|HistoricalExchangeRateRequest $request): bool
     {
         return false;
     }

@@ -16,4 +16,14 @@ final readonly class CurrentExchangeRateRequest
     {
         return new self($this->quoteCurrency, $this->baseCurrency);
     }
+
+    public function withBaseCurrency(string $baseCurrency): self
+    {
+        return new self($baseCurrency, $this->quoteCurrency);
+    }
+
+    public function withQuoteCurrency(string $quoteCurrency): self
+    {
+        return new self($this->baseCurrency, $quoteCurrency);
+    }
 }

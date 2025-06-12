@@ -16,8 +16,8 @@ final readonly class ArrayService implements CurrentExchangeRateServiceInterface
      * @param array<string, array<string, array<string, string|Decimal>> $historicalRates
      */
     public function __construct(
-        public readonly array $currentRates = [],
-        public readonly array $historicalRates = [],
+        public array $currentRates = [],
+        public array $historicalRates = [],
     ) {
     }
 
@@ -33,10 +33,10 @@ final readonly class ArrayService implements CurrentExchangeRateServiceInterface
         });
     }
 
-    public function supports(CurrentExchangeRateRequest|HistoricalExchangeRateRequest $query): bool
+    public function supports(CurrentExchangeRateRequest|HistoricalExchangeRateRequest $request): bool
     {
         return
-            $query instanceof CurrentExchangeRateRequest && $this->currentRates !== [] ||
-            $query instanceof HistoricalExchangeRateRequest && $this->historicalRates !== [];
+            $request instanceof CurrentExchangeRateRequest && $this->currentRates !== [] ||
+            $request instanceof HistoricalExchangeRateRequest && $this->historicalRates !== [];
     }
 }

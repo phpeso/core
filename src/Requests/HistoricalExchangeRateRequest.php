@@ -19,4 +19,19 @@ final readonly class HistoricalExchangeRateRequest
     {
         return new self($this->quoteCurrency, $this->baseCurrency, $this->date);
     }
+
+    public function withBaseCurrency(string $baseCurrency): self
+    {
+        return new self($baseCurrency, $this->quoteCurrency, $this->date);
+    }
+
+    public function withQuoteCurrency(string $quoteCurrency): self
+    {
+        return new self($this->baseCurrency, $quoteCurrency, $this->date);
+    }
+
+    public function withDate(Date $date): self
+    {
+        return new self($this->baseCurrency, $this->quoteCurrency, $date);
+    }
 }

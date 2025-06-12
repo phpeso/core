@@ -26,16 +26,8 @@ final readonly class ReverseService implements CurrentExchangeRateServiceInterfa
         }
     }
 
-    public function supports(CurrentExchangeRateRequest|HistoricalExchangeRateRequest $query): bool
+    public function supports(CurrentExchangeRateRequest|HistoricalExchangeRateRequest $request): bool
     {
-        if ($query instanceof CurrentExchangeRateRequest && $this->service instanceof CurrentExchangeRateServiceInterface) {
-            return $this->service->supports($query) || $this->service->supports($query->invert());
-        }
-
-        if ($query instanceof HistoricalExchangeRateRequest && $this->service instanceof HistoricalExchangeRateServiceInterface) {
-            return $this->service->supports($query) || $this->service->supports($query->invert());
-        }
-
-        return false;
+        return $this->service->supports($request) || $this->service->supports($request->invert());
     }
 }

@@ -9,6 +9,15 @@ use Peso\Core\Types\Decimal;
 
 final readonly class Calculator
 {
+    public static function multiply(Decimal $x, Decimal $y): Decimal
+    {
+        if (extension_loaded('bcmath')) {
+            return new Decimal(bcmul($x->value, $y->value));
+        }
+
+        return Decimal::init(BigDecimal::of($x->value)->multipliedBy(BigDecimal::of($y->value)));
+    }
+
     public static function divide(Decimal $x, Decimal $y): Decimal
     {
         if (extension_loaded('bcmath')) {

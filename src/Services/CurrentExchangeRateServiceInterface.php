@@ -15,5 +15,5 @@ interface CurrentExchangeRateServiceInterface
      */
     public function send(CurrentExchangeRateRequest $request): Decimal;
 
-    public function supports(CurrentExchangeRateRequest $query): bool;
+    public function supports(CurrentExchangeRateRequest $request): bool;
 }
