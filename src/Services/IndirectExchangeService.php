@@ -7,30 +7,46 @@ namespace Peso\Core\Services;
 use Peso\Core\Helpers\Calculator;
 use Peso\Core\Requests\CurrentExchangeRateRequest;
 use Peso\Core\Requests\HistoricalExchangeRateRequest;
-use Peso\Core\Types\Decimal;
+use Peso\Core\Responses\ErrorResponse;
+use Peso\Core\Responses\SuccessResponse;
 
-final readonly class IndirectExchangeService implements CurrentExchangeRateServiceInterface, HistoricalExchangeRateServiceInterface
+final readonly class IndirectExchangeService implements ExchangeRateServiceInterface
 {
     public function __construct(
-        private CurrentExchangeRateServiceInterface|HistoricalExchangeRateServiceInterface $service,
+        private ExchangeRateServiceInterface $service,
         private string $baseCurrency,
     ) {
     }
 
-    public function send(CurrentExchangeRateRequest|HistoricalExchangeRateRequest $request): Decimal
+    public function send(object $request): SuccessResponse|ErrorResponse
     {
         if ($request->baseCurrency === $this->baseCurrency || $request->quoteCurrency === $this->baseCurrency) {
             return $this->service->send($request);
         }
 
         $request1 = $request->withBaseCurrency($this->baseCurrency);
-        $request2 = $request->withQuoteCurrency($this->baseCurrency);
+        $response1 = $this->service->send($request1);
+        if ($response1 instanceof ErrorResponse) {
+            return $response1;
+        }
 
-        return Calculator::multiply($this->service->send($request1), $this->service->send($request2));
+        $request2 = $request->withQuoteCurrency($this->baseCurrency);
+        $response2 = $this->service->send($request2);
+        if ($response2 instanceof ErrorResponse) {
+            return $response2;
+        }
+
+        return new SuccessResponse(
+            Calculator::multiply($response1->rate, $response2->rate)
+        );
     }
 
-    public function supports(CurrentExchangeRateRequest|HistoricalExchangeRateRequest $request): bool
+    public function supports(object $request): bool
     {
+        if (!$request instanceof CurrentExchangeRateRequest && !$request instanceof HistoricalExchangeRateRequest) {
+            return false;
+        }
+
         if ($request->baseCurrency === $this->baseCurrency || $request->quoteCurrency === $this->baseCurrency) {
             return $this->service->supports($request);
         }
