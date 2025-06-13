@@ -12,9 +12,6 @@ use Peso\Core\Types\Decimal;
 
 interface ExchangeRateServiceInterface
 {
-    /**
-     * @throws PesoException
-     */
     public function send(object $request): SuccessResponse|ErrorResponse;
 
     public function supports(object $request): bool;
