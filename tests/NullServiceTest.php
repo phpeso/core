@@ -13,6 +13,7 @@ use Peso\Core\Services\NullService;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
+// Cover everything it touches
 class NullServiceTest extends TestCase
 {
     public function testSupportsNothing(): void

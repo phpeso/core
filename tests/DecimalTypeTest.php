@@ -7,9 +7,11 @@ namespace Peso\Core\Tests;
 use BcMath\Number;
 use Brick\Math\BigDecimal;
 use Peso\Core\Types\Decimal;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use ValueError;
 
+#[CoversClass(Decimal::class)]
 class DecimalTypeTest extends TestCase
 {
     public function testAcceptsString(): void

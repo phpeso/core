@@ -29,6 +29,6 @@
         "vimeo/psalm": "^6.12"
     },
     "suggest": {
-        "ext-bcmath": "For faster arithmetic"
+        "ext-bcmath": "For faster arithmetic (PHP 8.4+)"
     }
 }

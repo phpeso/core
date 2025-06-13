@@ -17,6 +17,7 @@ use Peso\Core\Types\Decimal;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
+// Cover everything it touches
 class ArrayServiceTest extends TestCase
 {
     public function testCurrent(): void

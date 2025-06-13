@@ -5,29 +5,43 @@ declare(strict_types=1);
 namespace Peso\Core\Services;
 
 use Peso\Core\Exceptions\ConversionRateNotFoundException;
+use Peso\Core\Exceptions\RequestNotSupportedException;
 use Peso\Core\Helpers\Calculator;
 use Peso\Core\Requests\CurrentExchangeRateRequest;
 use Peso\Core\Requests\HistoricalExchangeRateRequest;
-use Peso\Core\Types\Decimal;
+use Peso\Core\Responses\ErrorResponse;
+use Peso\Core\Responses\SuccessResponse;
 
-final readonly class ReverseService implements CurrentExchangeRateServiceInterface, HistoricalExchangeRateServiceInterface
+final readonly class ReverseService implements ExchangeRateServiceInterface
 {
     public function __construct(
-        private CurrentExchangeRateServiceInterface|HistoricalExchangeRateServiceInterface $service,
+        private ExchangeRateServiceInterface $service,
     ) {
     }
 
-    public function send(CurrentExchangeRateRequest|HistoricalExchangeRateRequest $request): Decimal
+    public function send(object $request): SuccessResponse|ErrorResponse
     {
-        try {
-            return $this->service->send($request);
-        } catch (ConversionRateNotFoundException) {
-            return Calculator::invert($this->service->send($request->invert()));
+        if ($request instanceof CurrentExchangeRateRequest || $request instanceof HistoricalExchangeRateRequest) {
+            $innerResult = $this->service->send($request);
+            if ($innerResult instanceof SuccessResponse) {
+                return $innerResult;
+            }
+            if ($innerResult->exception instanceof ConversionRateNotFoundException) {
+                $invertedResult = $this->service->send($request->invert());
+                if ($invertedResult instanceof SuccessResponse) {
+                    return new SuccessResponse(Calculator::invert($invertedResult->rate));
+                }
+            }
+            return $innerResult; // return the first result
         }
+
+        return new ErrorResponse(RequestNotSupportedException::fromRequest($request));
     }
 
-    public function supports(CurrentExchangeRateRequest|HistoricalExchangeRateRequest $request): bool
+    public function supports(object $request): bool
     {
-        return $this->service->supports($request) || $this->service->supports($request->invert());
+        return
+            ($request instanceof CurrentExchangeRateRequest || $request instanceof HistoricalExchangeRateRequest) &&
+            $this->service->supports($request);
     }
 }
