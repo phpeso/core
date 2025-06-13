@@ -1,6 +1,9 @@
 {
     "name": "peso/core",
     "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
         "sort-packages": true
     },
     "autoload": {
@@ -8,9 +11,24 @@
             "Peso\\Core\\": "src"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Peso\\Core\\Tests\\": "tests"
+        }
+    },
     "require": {
         "php": "^8.2",
         "arokettu/date": "^2.0",
         "brick/math": ">=0.13 <0.14"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^12.2",
+        "psy/psysh": "^0.12.8",
+        "sandfox.dev/code-standard": "^1.2025.05.07",
+        "squizlabs/php_codesniffer": "*",
+        "vimeo/psalm": "^6.12"
+    },
+    "suggest": {
+        "ext-bcmath": "For faster arithmetic"
     }
 }

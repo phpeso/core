@@ -4,3 +4,7 @@
 # composer
 /vendor
 /composer.lock
+
+# QA
+/reports
+/.phpunit.result.cache
