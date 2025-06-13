@@ -4,19 +4,17 @@ declare(strict_types=1);
 
 namespace Peso\Core\Services;
 
-use Peso\Core\Exceptions\ConversionRateNotFoundException;
-use Peso\Core\Requests\CurrentExchangeRateRequest;
-use Peso\Core\Requests\HistoricalExchangeRateRequest;
-use Peso\Core\Types\Decimal;
+use Peso\Core\Exceptions\RequestNotSupportedException;
+use Peso\Core\Responses\ErrorResponse;
 
-final readonly class NullService implements CurrentExchangeRateServiceInterface, HistoricalExchangeRateServiceInterface
+final readonly class NullService implements ExchangeRateServiceInterface
 {
-    public function send(CurrentExchangeRateRequest|HistoricalExchangeRateRequest $request): Decimal
+    public function send(object $request): ErrorResponse
     {
-        throw new ConversionRateNotFoundException();
+        return new ErrorResponse(RequestNotSupportedException::fromRequest($request));
     }
 
-    public function supports(CurrentExchangeRateRequest|HistoricalExchangeRateRequest $request): bool
+    public function supports(object $request): bool
     {
         return false;
     }
