@@ -2,7 +2,8 @@
     "name": "peso/core",
     "config": {
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "php-http/discovery": true
         },
         "sort-packages": true
     },
@@ -19,9 +20,13 @@
     "require": {
         "php": "^8.2",
         "arokettu/date": "^2.0",
-        "brick/math": ">=0.13 <0.14"
+        "brick/math": ">=0.13 <0.14",
+        "psr/http-client": "^1",
+        "psr/http-factory": "^1",
+        "psr/simple-cache": "^1 || ^2 || ^3"
     },
     "require-dev": {
+        "php-http/discovery": "^1.20",
         "phpunit/phpunit": "^12.2",
         "psy/psysh": "^0.12.8",
         "sandfox.dev/code-standard": "^1.2025.05.07",
