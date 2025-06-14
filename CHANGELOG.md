@@ -2,6 +2,12 @@
 
 ## Pre-release
 
+### 0.1.3
+
+*June 14, 2025*
+
+* Service SDK classes
+
 ### 0.1.2
 
 *June 14, 2025*
