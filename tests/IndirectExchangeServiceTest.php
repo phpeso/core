@@ -13,7 +13,7 @@ use Peso\Core\Responses\SuccessResponse;
 use Peso\Core\Services\ArrayService;
 use Peso\Core\Services\IndirectExchangeService;
 use Peso\Core\Services\NullService;
-use Peso\Core\Services\ReverseService;
+use Peso\Core\Services\ReversibleService;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use stdClass;
@@ -24,7 +24,7 @@ class IndirectExchangeServiceTest extends TestCase
 {
     public function testSupport(): void
     {
-        $service = new IndirectExchangeService(new ReverseService(new ArrayService(currentRates: [
+        $service = new IndirectExchangeService(new ReversibleService(new ArrayService(currentRates: [
             'EUR' => [
                 'USD' => '1.12345',
                 'GBP' => '0.75',
@@ -53,14 +53,14 @@ class IndirectExchangeServiceTest extends TestCase
         self::assertFalse($service->supports(new stdClass()));
 
         // inner that doesn't support requests
-        $service = new ReverseService(new NullService());
+        $service = new ReversibleService(new NullService());
         self::assertFalse($service->supports(new CurrentExchangeRateRequest('GBP', 'USD')));
         self::assertFalse($service->supports(new HistoricalExchangeRateRequest('GBP', 'USD', Date::today())));
     }
 
     public function testDirect(): void
     {
-        $service = new IndirectExchangeService(new ReverseService(new ArrayService(currentRates: [
+        $service = new IndirectExchangeService(new ReversibleService(new ArrayService(currentRates: [
             'EUR' => [
                 'USD' => '1.12345',
                 'GBP' => '0.75',
@@ -84,7 +84,7 @@ class IndirectExchangeServiceTest extends TestCase
 
     public function testDirectReverse(): void
     {
-        $service = new IndirectExchangeService(new ReverseService(new ArrayService(currentRates: [
+        $service = new IndirectExchangeService(new ReversibleService(new ArrayService(currentRates: [
             'EUR' => [
                 'USD' => '1.12345',
                 'GBP' => '0.75',
@@ -109,7 +109,7 @@ class IndirectExchangeServiceTest extends TestCase
 
     public function testIndirect(): void
     {
-        $service = new IndirectExchangeService(new ReverseService(new ArrayService(currentRates: [
+        $service = new IndirectExchangeService(new ReversibleService(new ArrayService(currentRates: [
             'EUR' => [
                 'USD' => '1.12345',
                 'GBP' => '0.75',

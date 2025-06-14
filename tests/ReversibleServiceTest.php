@@ -15,20 +15,20 @@ use Peso\Core\Responses\ErrorResponse;
 use Peso\Core\Responses\SuccessResponse;
 use Peso\Core\Services\ArrayService;
 use Peso\Core\Services\NullService;
-use Peso\Core\Services\ReverseService;
+use Peso\Core\Services\ReversibleService;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
-#[CoversClass(ReverseService::class)]
+#[CoversClass(ReversibleService::class)]
 #[CoversClass(Calculator::class)] // inversion
 #[CoversClass(CurrentExchangeRateRequest::class)] // inversion
 #[CoversClass(HistoricalExchangeRateRequest::class)] // inversion
-class ReverseServiceTest extends TestCase
+class ReversibleServiceTest extends TestCase
 {
     public function testSupport(): void
     {
-        $service = new ReverseService(new ArrayService(currentRates: [
+        $service = new ReversibleService(new ArrayService(currentRates: [
             'EUR' => ['USD' => '1.12345'],
         ], historicalRates: [
             '2015-01-02' => ['EUR' => ['USD' => '1.23456']],
@@ -42,14 +42,14 @@ class ReverseServiceTest extends TestCase
         self::assertFalse($service->supports(new stdClass()));
 
         // inner that doesn't support requests
-        $service = new ReverseService(new NullService());
+        $service = new ReversibleService(new NullService());
         self::assertFalse($service->supports(new CurrentExchangeRateRequest('EUR', 'USD')));
         self::assertFalse($service->supports(new HistoricalExchangeRateRequest('EUR', 'USD', Date::today())));
     }
 
     public function testDirect(): void
     {
-        $service = new ReverseService(new ArrayService(currentRates: [
+        $service = new ReversibleService(new ArrayService(currentRates: [
             'EUR' => ['USD' => '1.12345'],
         ], historicalRates: [
             '2015-01-02' => ['EUR' => ['USD' => '1.23456']],
@@ -67,7 +67,7 @@ class ReverseServiceTest extends TestCase
 
     public function testReverse(): void
     {
-        $service = new ReverseService(new ArrayService(currentRates: [
+        $service = new ReversibleService(new ArrayService(currentRates: [
             'EUR' => ['USD' => '1.12345'],
         ], historicalRates: [
             '2015-01-02' => ['EUR' => ['USD' => '1.23456']],
@@ -86,7 +86,7 @@ class ReverseServiceTest extends TestCase
 
     public function testNotFound(): void
     {
-        $service = new ReverseService(new ArrayService(currentRates: [
+        $service = new ReversibleService(new ArrayService(currentRates: [
             'EUR' => ['USD' => '1.12345'],
         ], historicalRates: [
             '2015-01-02' => ['EUR' => ['USD' => '1.23456']],
@@ -101,7 +101,7 @@ class ReverseServiceTest extends TestCase
 
     public function testOnlyKnownRequests(): void
     {
-        $service = new ReverseService(new ArrayService(currentRates: [
+        $service = new ReversibleService(new ArrayService(currentRates: [
             'EUR' => ['USD' => '1.12345'],
         ], historicalRates: [
             '2015-01-02' => ['EUR' => ['USD' => '1.23456']],
