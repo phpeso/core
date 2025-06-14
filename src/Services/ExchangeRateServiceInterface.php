@@ -15,5 +15,7 @@ interface ExchangeRateServiceInterface
      */
     public function send(object $request): SuccessResponse|ErrorResponse;
 
+    /**
+     */
     public function supports(object $request): bool;
 }
