@@ -34,7 +34,7 @@ final class HttpFailureException extends Exception implements RuntimeException
             $message = substr($message, 0, 100) . '...';
         }
         return new self(\sprintf(
-            'HTTP Error %s. Response is "%s"',
+            'HTTP error %s. Response is "%s"',
             (string)$response->getStatusCode(),
             $message,
         ), $response->getStatusCode(), null, $request, $response);
