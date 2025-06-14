@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace Peso\Core\Exceptions;
 
-use Exception;
-
-class NoSuitableServiceFoundException extends Exception implements PesoException
+final class NoSuitableServiceFoundException extends PesoResponseException
 {
-    /** @var list<PesoException> */
+    /** @var list<PesoResponseException> */
     public readonly array $exceptions;
 
-    public function __construct(PesoException ...$exceptions) {
+    public function __construct(PesoResponseException ...$exceptions)
+    {
         $this->exceptions = $exceptions;
         parent::__construct('No service in the chain could handle the request', 0, $exceptions[0] ?? null);
     }

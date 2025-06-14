@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peso\Core\Responses;
 
 use Peso\Core\Types\Decimal;

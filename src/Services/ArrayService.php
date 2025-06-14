@@ -7,7 +7,7 @@ namespace Peso\Core\Services;
 use BcMath\Number;
 use Brick\Math\BigDecimal;
 use Peso\Core\Exceptions\ConversionRateNotFoundException;
-use Peso\Core\Exceptions\PesoException;
+use Peso\Core\Exceptions\PesoResponseException;
 use Peso\Core\Exceptions\RequestNotSupportedException;
 use Peso\Core\Requests\CurrentExchangeRateRequest;
 use Peso\Core\Requests\HistoricalExchangeRateRequest;
@@ -31,13 +31,13 @@ final readonly class ArrayService implements ExchangeRateServiceInterface
     {
         try {
             return new SuccessResponse($this->doSend($request));
-        } catch (PesoException $e) {
+        } catch (PesoResponseException $e) {
             return new ErrorResponse($e);
         }
     }
 
     /**
-     * @throws PesoException
+     * @throws PesoResponseException
      */
     private function doSend(object $request): Decimal
     {

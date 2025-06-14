@@ -15,7 +15,8 @@ final readonly class Decimal
     /**
      * @param numeric-string $value
      */
-    public function __construct(string $value) {
+    public function __construct(string $value)
+    {
         if (!preg_match('/^-?\d*\.?\d*$/', $value)) {
             throw new ValueError('$value must be a string representing a decimal number');
         }

@@ -35,6 +35,12 @@ final readonly class Calculator
         }
 
         $value = BigDecimal::of($x->value);
-        return Decimal::init(BigDecimal::one()->dividedBy($value, $value->getScale() + 10, BrickRoundingMode::HALF_EVEN));
+        return Decimal::init(
+            BigDecimal::one()->dividedBy(
+                $value,
+                $value->getScale() + 10,
+                BrickRoundingMode::HALF_EVEN
+            )
+        );
     }
 }

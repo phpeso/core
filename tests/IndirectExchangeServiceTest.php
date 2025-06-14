@@ -99,7 +99,8 @@ class IndirectExchangeServiceTest extends TestCase
 
         $response = $service->send(new CurrentExchangeRateRequest('USD', 'EUR'));
         self::assertInstanceOf(SuccessResponse::class, $response);
-        self::assertEquals('0.890115269927456', $response->rate->value); // assert that BcMath and Brick handle precision the same way
+        // assert that BcMath and Brick handle precision the same way
+        self::assertEquals('0.890115269927456', $response->rate->value);
 
         $response = $service->send(new HistoricalExchangeRateRequest('USD', 'EUR', $date));
         self::assertInstanceOf(SuccessResponse::class, $response);

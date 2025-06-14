@@ -1,11 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Peso\Core\Exceptions;
 
-use Exception;
 use Throwable;
 
-final class RequestNotSupportedException extends Exception implements PesoException
+final class RequestNotSupportedException extends PesoResponseException
 {
     public static function fromRequest(object $request, Throwable|null $previous = null): self
     {

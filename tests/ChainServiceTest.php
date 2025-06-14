@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Peso\Core\Tests;
 
-use Arokettu\Date\Calendar;
 use Arokettu\Date\Date;
 use Peso\Core\Exceptions\ConversionRateNotFoundException;
 use Peso\Core\Exceptions\NoSuitableServiceFoundException;

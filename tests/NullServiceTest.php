@@ -25,14 +25,20 @@ class NullServiceTest extends TestCase
         $error = $service->send($request);
         self::assertInstanceOf(ErrorResponse::class, $error);
         self::assertInstanceOf(RequestNotSupportedException::class, $error->exception);
-        self::assertEquals('Unrecognized request type: "Peso\Core\Requests\CurrentExchangeRateRequest"', $error->exception->getMessage());
+        self::assertEquals(
+            'Unrecognized request type: "Peso\Core\Requests\CurrentExchangeRateRequest"',
+            $error->exception->getMessage()
+        );
 
         $request = new HistoricalExchangeRateRequest('EUR', 'USD', Date::today());
         self::assertFalse($service->supports($request));
         $error = $service->send($request);
         self::assertInstanceOf(ErrorResponse::class, $error);
         self::assertInstanceOf(RequestNotSupportedException::class, $error->exception);
-        self::assertEquals('Unrecognized request type: "Peso\Core\Requests\HistoricalExchangeRateRequest"', $error->exception->getMessage());
+        self::assertEquals(
+            'Unrecognized request type: "Peso\Core\Requests\HistoricalExchangeRateRequest"',
+            $error->exception->getMessage()
+        );
 
         $request = new stdClass();
         self::assertFalse($service->supports($request));
