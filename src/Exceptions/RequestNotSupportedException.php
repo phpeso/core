@@ -6,6 +6,9 @@ namespace Peso\Core\Exceptions;
 
 use Throwable;
 
+/**
+ * The request class is not recognized
+ */
 final class RequestNotSupportedException extends PesoResponseException
 {
     public static function fromRequest(object $request, Throwable|null $previous = null): self

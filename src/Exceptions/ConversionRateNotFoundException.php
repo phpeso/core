@@ -8,6 +8,9 @@ use Peso\Core\Requests\CurrentExchangeRateRequest;
 use Peso\Core\Requests\HistoricalExchangeRateRequest;
 use Throwable;
 
+/**
+ * The request was understood but the specific pair was not found
+ */
 final class ConversionRateNotFoundException extends PesoResponseException
 {
     public static function fromRequest(

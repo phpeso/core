@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Peso\Core\Exceptions;
 
+/**
+ * No service in the chain could handle the request
+ */
 final class NoSuitableServiceFoundException extends PesoResponseException
 {
     /** @var list<PesoResponseException> */
