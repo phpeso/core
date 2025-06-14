@@ -2,6 +2,12 @@
 
 ## Pre-release
 
+### 0.1.4
+
+*June 14, 2025*
+
+* Store request and response in the HTTP exception
+
 ### 0.1.3
 
 *June 14, 2025*
