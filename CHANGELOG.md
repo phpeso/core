@@ -2,6 +2,13 @@
 
 ## Pre-release
 
+### 0.1.5
+
+*June 17, 2025*
+
+* ReverseService -> ReversibleService
+* Calculator::round()
+
 ### 0.1.4
 
 *June 14, 2025*
