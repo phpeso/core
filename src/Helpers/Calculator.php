@@ -15,7 +15,7 @@ final readonly class Calculator
     public static function multiply(Decimal $x, Decimal $y): Decimal
     {
         if (class_exists(Number::class)) {
-            return new Decimal((string)(new Number($x->value) * new Number($y->value)));
+            return Decimal::init(new Number($x->value) * new Number($y->value));
         }
 
         return Decimal::init(BigDecimal::of($x->value)->multipliedBy(BigDecimal::of($y->value)));
@@ -31,7 +31,7 @@ final readonly class Calculator
             if ($result->scale === $scale + 11) { // max scale (+1 + 10 from BcMath)
                 $result = $result->round($scale + 10, RoundingMode::HalfEven);
             }
-            return new Decimal((string)$result);
+            return Decimal::init($result);
         }
 
         $value = BigDecimal::of($x->value);
@@ -42,5 +42,16 @@ final readonly class Calculator
                 BrickRoundingMode::HALF_EVEN
             )
         );
+    }
+
+    public static function round(Decimal $x, int $precision): Decimal
+    {
+        if (class_exists(Number::class)) {
+            $number = new Number($x->value);
+            return new Decimal((string)$number->round($precision, RoundingMode::HalfEven));
+        }
+
+        $value = BigDecimal::of($x->value);
+        return Decimal::init($value->toScale($precision, BrickRoundingMode::HALF_EVEN));
     }
 }
