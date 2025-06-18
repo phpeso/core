@@ -5,53 +5,38 @@ declare(strict_types=1);
 namespace Peso\Core\Helpers;
 
 use BcMath\Number;
-use Brick\Math\BigDecimal;
-use Brick\Math\RoundingMode as BrickRoundingMode;
 use Peso\Core\Types\Decimal;
-use RoundingMode;
 
-final readonly class Calculator
+final class Calculator
 {
+    private static CalculatorInterface $instance;
+
+    public static function instance(): CalculatorInterface
+    {
+        return self::$instance ??= class_exists(Number::class) ? new BcMathCalculator() : new BrickCalculator();
+    }
+
+    /**
+     * @deprecated Will be removed in 1.x
+     */
     public static function multiply(Decimal $x, Decimal $y): Decimal
     {
-        if (class_exists(Number::class)) {
-            return Decimal::init(new Number($x->value) * new Number($y->value));
-        }
-
-        return Decimal::init(BigDecimal::of($x->value)->multipliedBy(BigDecimal::of($y->value)));
+        return self::instance()->multiply($x, $y);
     }
 
+    /**
+     * @deprecated Will be removed in 1.x
+     */
     public static function invert(Decimal $x): Decimal
     {
-        if (class_exists(Number::class)) {
-            $value = new Number($x->value);
-            $scale = $value->scale;
-            $value = $value->round($scale + 1); // add one digit
-            $result = $value ** -1;
-            if ($result->scale === $scale + 11) { // max scale (+1 + 10 from BcMath)
-                $result = $result->round($scale + 10, RoundingMode::HalfEven);
-            }
-            return Decimal::init($result);
-        }
-
-        $value = BigDecimal::of($x->value);
-        return Decimal::init(
-            BigDecimal::one()->dividedBy(
-                $value,
-                $value->getScale() + 10,
-                BrickRoundingMode::HALF_EVEN
-            )
-        );
+        return self::instance()->invert($x);
     }
 
+    /**
+     * @deprecated Will be removed in 1.x
+     */
     public static function round(Decimal $x, int $precision): Decimal
     {
-        if (class_exists(Number::class)) {
-            $number = new Number($x->value);
-            return new Decimal((string)$number->round($precision, RoundingMode::HalfEven));
-        }
-
-        $value = BigDecimal::of($x->value);
-        return Decimal::init($value->toScale($precision, BrickRoundingMode::HALF_EVEN));
+        return self::instance()->round($x, $precision);
     }
 }
