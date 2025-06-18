@@ -1,5 +1,21 @@
 {
     "name": "peso/core",
+    "type": "library",
+    "description": "Core component of the Peso for PHP Framework",
+    "keywords": ["currency", "exchange", "conversion"],
+    "homepage": "https://phpeso.readthedocs.io/",
+    "license": "MIT",
+    "authors": [{
+        "name": "Anton Smirnov",
+        "role": "developer",
+        "homepage": "https://sandfox.me/",
+        "email": "sandfox+phpeso@sandfox.me"
+    }],
+    "support": {
+        "issues": "https://github.com/phpeso/core/issues",
+        "source": "https://github.com/phpeso/core",
+        "docs": "https://phpeso.readthedocs.io/"
+    },
     "config": {
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true,
