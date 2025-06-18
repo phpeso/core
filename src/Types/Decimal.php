@@ -10,6 +10,7 @@ use ValueError;
 
 final readonly class Decimal
 {
+    /** @var numeric-string */
     public string $value;
 
     /**
