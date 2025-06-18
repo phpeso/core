@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Peso\Core\Tests;
+namespace Peso\Core\Tests\Services;
 
 use Arokettu\Date\Calendar;
 use Arokettu\Date\Date;
-use Peso\Core\Helpers\Calculator;
 use Peso\Core\Requests\CurrentExchangeRateRequest;
 use Peso\Core\Requests\HistoricalExchangeRateRequest;
+use Peso\Core\Responses\ErrorResponse;
 use Peso\Core\Responses\SuccessResponse;
 use Peso\Core\Services\ArrayService;
 use Peso\Core\Services\IndirectExchangeService;
@@ -19,7 +19,6 @@ use PHPUnit\Framework\TestCase;
 use stdClass;
 
 #[CoversClass(IndirectExchangeService::class)]
-#[CoversClass(Calculator::class)] // multiply
 class IndirectExchangeServiceTest extends TestCase
 {
     public function testSupport(): void
@@ -129,5 +128,28 @@ class IndirectExchangeServiceTest extends TestCase
         $response = $service->send(new HistoricalExchangeRateRequest('GBP', 'USD', $date));
         self::assertInstanceOf(SuccessResponse::class, $response);
         self::assertEquals('1.5432000', $response->rate->value);
+    }
+
+    public function testInnerServiceNotSupportsQuery(): void
+    {
+        $array = new ArrayService([
+            'USD' => [
+                'EUR' => '0.92',
+                'RUB' => '0.016153'
+            ],
+            'EUR' => ['USD' => '1.087'],
+            'RUB' => ['USD' => '61.9077'],
+        ]);
+        $service = new IndirectExchangeService($array, 'EUR');
+
+        // first result fails
+        $result = $service->send(new CurrentExchangeRateRequest('USD', 'RUB'));
+        self::assertInstanceOf(ErrorResponse::class, $result);
+        self::assertEquals('Unable to find exchange rate for EUR/RUB', $result->exception->getMessage());
+
+        // second result fails
+        $result = $service->send(new CurrentExchangeRateRequest('RUB', 'USD'));
+        self::assertInstanceOf(ErrorResponse::class, $result);
+        self::assertEquals('Unable to find exchange rate for RUB/EUR', $result->exception->getMessage());
     }
 }

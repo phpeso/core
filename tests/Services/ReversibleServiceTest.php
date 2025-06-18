@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Peso\Core\Tests;
+namespace Peso\Core\Tests\Services;
 
 use Arokettu\Date\Calendar;
 use Arokettu\Date\Date;
 use Peso\Core\Exceptions\ConversionRateNotFoundException;
 use Peso\Core\Exceptions\RequestNotSupportedException;
-use Peso\Core\Helpers\Calculator;
 use Peso\Core\Requests\CurrentExchangeRateRequest;
 use Peso\Core\Requests\HistoricalExchangeRateRequest;
 use Peso\Core\Responses\ErrorResponse;
@@ -21,7 +20,6 @@ use PHPUnit\Framework\TestCase;
 use stdClass;
 
 #[CoversClass(ReversibleService::class)]
-#[CoversClass(Calculator::class)] // inversion
 #[CoversClass(CurrentExchangeRateRequest::class)] // inversion
 #[CoversClass(HistoricalExchangeRateRequest::class)] // inversion
 class ReversibleServiceTest extends TestCase

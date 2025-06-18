@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Peso\Core\Tests;
+namespace Peso\Core\Tests\Services;
 
 use Arokettu\Date\Calendar;
 use Arokettu\Date\Date;

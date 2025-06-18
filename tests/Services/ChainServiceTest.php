@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Peso\Core\Tests;
+namespace Peso\Core\Tests\Services;
 
 use Arokettu\Date\Date;
 use Peso\Core\Exceptions\ConversionRateNotFoundException;
@@ -17,8 +17,10 @@ use Peso\Core\Services\ChainService;
 use Peso\Core\Services\NullService;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
+use ValueError;
 
 #[CoversClass(ChainService::class)]
+#[CoversClass(NoSuitableServiceFoundException::class)]
 class ChainServiceTest extends TestCase
 {
     public function testFound(): void
@@ -59,5 +61,13 @@ class ChainServiceTest extends TestCase
         self::assertInstanceOf(RequestNotSupportedException::class, $exceptions[0]);
         self::assertInstanceOf(ConversionRateNotFoundException::class, $exceptions[1]);
         self::assertSame($exception->getPrevious(), $exceptions[0]);
+    }
+
+    public function testNoEmpty(): void
+    {
+        $this->expectException(ValueError::class);
+        $this->expectExceptionMessage('List of services must be non-empty');
+
+        new ChainService();
     }
 }
