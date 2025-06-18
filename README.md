@@ -6,7 +6,7 @@
 
 [Packagist]: https://img.shields.io/packagist/v/peso/core.svg?style=flat-square
 [PHP]: https://img.shields.io/packagist/php-v/peso/core.svg?style=flat-square
-[License]: https://img.shields.io/packagist/l/arokettu/ip-address-doctrine.svg?style=flat-square
+[License]: https://img.shields.io/packagist/l/peso/core.svg?style=flat-square
 
 [Packagist Link]: https://packagist.org/packages/peso/core
 [License Link]: LICENSE.md
