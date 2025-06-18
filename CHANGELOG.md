@@ -5,6 +5,7 @@
 ### next
 
 * Dropped hard dependency on psr interfaces
+* Decimal no longer accepts negative and zero values
 
 ### 0.9.0 "Beta 1"
 
