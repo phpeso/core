@@ -40,7 +40,7 @@
 
 * Separate `PesoException` and `PesoResponseException`
 
-### 0.1.0
+### 0.1.0 "Alpha 1"
 
 *June 13, 2025*
  
