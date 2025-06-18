@@ -2,6 +2,13 @@
 
 ## Pre-release
 
+### 0.9.0 "Beta 1"
+
+*Jun 18, 2025*
+
+* UserAgentHelper
+* Tests and various bugfixes
+
 ### 0.1.5
 
 *June 17, 2025*
