@@ -127,7 +127,7 @@ class IndirectExchangeServiceTest extends TestCase
 
         $response = $service->send(new HistoricalExchangeRateRequest('GBP', 'USD', $date));
         self::assertInstanceOf(SuccessResponse::class, $response);
-        self::assertEquals('1.5432000', $response->rate->value);
+        self::assertEquals('1.5432000000000000', $response->rate->value);
     }
 
     public function testInnerServiceNotSupportsQuery(): void

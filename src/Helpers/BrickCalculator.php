@@ -11,7 +11,7 @@ use Peso\Core\Types\Decimal;
 /**
  * @internal Services should not ask for a specific implementation
  */
-class BrickCalculator implements CalculatorInterface
+final readonly class BrickCalculator implements CalculatorInterface
 {
     public function multiply(Decimal $x, Decimal $y): Decimal
     {
@@ -26,10 +26,11 @@ class BrickCalculator implements CalculatorInterface
     public function invert(Decimal $x): Decimal
     {
         $value = BigDecimal::of($x->value);
+        $scale = $value->getScale();
         return Decimal::init(
             BigDecimal::one()->dividedBy(
                 $value,
-                $value->getScale() + 10,
+                $scale + 10,
                 BrickRoundingMode::HALF_EVEN
             )
         );

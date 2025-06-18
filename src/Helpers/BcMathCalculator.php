@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace Peso\Core\Helpers;
 
 use BcMath\Number;
-use Error;
 use Peso\Core\Types\Decimal;
 use RoundingMode;
 
 /**
  * @internal Services should not ask for a specific implementation
  */
-class BcMathCalculator implements CalculatorInterface
+final readonly class BcMathCalculator implements CalculatorInterface
 {
     public function multiply(Decimal $x, Decimal $y): Decimal
     {
@@ -28,11 +27,9 @@ class BcMathCalculator implements CalculatorInterface
     {
         $value = new Number($x->value);
         $scale = $value->scale;
-        $value = $value->round($scale + 1); // add one digit
+        $value = $value->round($scale + 2); // add two digits
         $result = $value ** -1;
-        if ($result->scale === $scale + 11) { // max scale (+1 + 10 from BcMath)
-            $result = $result->round($scale + 10, RoundingMode::HalfEven);
-        }
+        $result = $result->round($scale + 10, RoundingMode::HalfEven);
         return Decimal::init($result);
     }
 
