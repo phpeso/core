@@ -2,6 +2,10 @@
 
 ## Pre-release
 
+### next
+
+* Dropped hard dependency on psr interfaces
+
 ### 0.9.0 "Beta 1"
 
 *Jun 18, 2025*
