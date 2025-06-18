@@ -17,7 +17,7 @@ class DefaultCalculatorTest extends TestCase
         $calc = Calculator::instance();
 
         self::assertInstanceOf(CalculatorInterface::class, $calc);
-        if (extension_loaded('bcmath') && PHP_VERSION_ID >= 80400) {
+        if (\extension_loaded('bcmath') && PHP_VERSION_ID >= 80400) {
             self::assertInstanceOf(BcMathCalculator::class, $calc);
         } else {
             self::assertInstanceOf(BrickCalculator::class, $calc);

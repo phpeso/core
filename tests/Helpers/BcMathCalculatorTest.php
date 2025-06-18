@@ -11,7 +11,7 @@ class BcMathCalculatorTest extends CalculatorTestTemplate
 {
     protected function setUp(): void
     {
-        if (!extension_loaded('bcmath') || PHP_VERSION_ID < 80400) {
+        if (!\extension_loaded('bcmath') || PHP_VERSION_ID < 80400) {
             $this->markTestSkipped('This calculator works only in PHP 8.4+ with bcmath installed');
         }
     }

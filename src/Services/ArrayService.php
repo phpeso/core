@@ -15,6 +15,8 @@ use Peso\Core\Responses\ErrorResponse;
 use Peso\Core\Responses\SuccessResponse;
 use Peso\Core\Types\Decimal;
 
+// can't write it shorter
+// phpcs:disable Generic.Files.LineLength.TooLong
 final readonly class ArrayService implements ExchangeRateServiceInterface
 {
     /**
