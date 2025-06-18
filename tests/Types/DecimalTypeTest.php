@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Peso\Core\Tests\Services;
+namespace Peso\Core\Tests\Types;
 
 use BcMath\Number;
 use Brick\Math\BigDecimal;
