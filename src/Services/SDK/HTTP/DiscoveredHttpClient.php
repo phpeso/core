@@ -17,10 +17,12 @@ final readonly class DiscoveredHttpClient implements ClientInterface
     public function __construct()
     {
         if (!class_exists(Psr18Client::class)) {
+            // @codeCoverageIgnoreStart
             throw new Error(
                 'HTTP client class (PSR-18) implementation not found. ' .
                 'Please pass an instance of HTTP client manually or install php-http/discovery.'
             );
+            // @codeCoverageIgnoreEnd
         }
         $this->innerClient = new Psr18Client();
     }

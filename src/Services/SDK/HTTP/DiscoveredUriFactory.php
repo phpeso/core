@@ -16,10 +16,12 @@ final readonly class DiscoveredUriFactory implements UriFactoryInterface
     public function __construct()
     {
         if (!class_exists(Psr17Factory::class)) {
+            // @codeCoverageIgnoreStart
             throw new Error(
                 'HTTP URI factory class (PSR-17) implementation not found. ' .
                 'Please pass an instance of HTTP URI factory manually or install php-http/discovery.'
             );
+            // @codeCoverageIgnoreEnd
         }
         $this->innerFactory = new Psr17Factory();
     }
