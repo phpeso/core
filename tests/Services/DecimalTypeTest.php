@@ -20,16 +20,78 @@ class DecimalTypeTest extends TestCase
         self::assertEquals('1234', (new Decimal('1234'))->value);
         self::assertEquals('.34', (new Decimal('.34'))->value);
         self::assertEquals('12.', (new Decimal('12.'))->value);
-        self::assertEquals('0', (new Decimal('.'))->value);
-        self::assertEquals('-12.34', (new Decimal('-12.34'))->value);
     }
 
     public function testNonNumeric(): void
     {
         self::expectException(ValueError::class);
-        self::expectExceptionMessage('$value must be a string representing a decimal number');
+        self::expectExceptionMessage('$value must be a string representing a positive decimal number');
 
         new Decimal('abc.de');
+    }
+
+    public function testNegative(): void
+    {
+        self::expectException(ValueError::class);
+        self::expectExceptionMessage('$value must be a string representing a positive decimal number');
+
+        new Decimal('-12.34');
+    }
+
+    public function testZero1(): void
+    {
+        self::expectException(ValueError::class);
+        self::expectExceptionMessage('$value must be a string representing a positive decimal number');
+
+        new Decimal('0');
+    }
+
+    public function testZero2(): void
+    {
+        self::expectException(ValueError::class);
+        self::expectExceptionMessage('$value must be a string representing a positive decimal number');
+
+        new Decimal('0.');
+    }
+
+    public function testZero3(): void
+    {
+        self::expectException(ValueError::class);
+        self::expectExceptionMessage('$value must be a string representing a positive decimal number');
+
+        new Decimal('.0');
+    }
+
+    public function testZero4(): void
+    {
+        self::expectException(ValueError::class);
+        self::expectExceptionMessage('$value must be a string representing a positive decimal number');
+
+        new Decimal('.0');
+    }
+
+    public function testZero5(): void
+    {
+        self::expectException(ValueError::class);
+        self::expectExceptionMessage('$value must be a string representing a positive decimal number');
+
+        new Decimal('000.0000');
+    }
+
+    public function testEmpty(): void
+    {
+        self::expectException(ValueError::class);
+        self::expectExceptionMessage('$value must be a string representing a positive decimal number');
+
+        new Decimal('');
+    }
+
+    public function testDot(): void
+    {
+        self::expectException(ValueError::class);
+        self::expectExceptionMessage('$value must be a string representing a positive decimal number');
+
+        new Decimal('.');
     }
 
     public function testAcceptsAnotherDecimal(): void

@@ -18,11 +18,8 @@ final readonly class Decimal
      */
     public function __construct(string $value)
     {
-        if (!preg_match('/^-?\d*\.?\d*$/', $value)) {
-            throw new ValueError('$value must be a string representing a decimal number');
-        }
-        if ($value === '.') {
-            $value = '0';
+        if (!preg_match('/^(?:\d+\.?\d*|\d*\.?\d+)$/', $value) || preg_match('/^[.0]+$/', $value)) {
+            throw new ValueError('$value must be a string representing a positive decimal number');
         }
         $this->value = $value;
     }
