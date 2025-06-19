@@ -2,7 +2,9 @@
 
 ## Pre-release
 
-### next
+### 0.9.1
+
+*Jun 19, 2025*
 
 * Dropped hard dependency on psr interfaces
 * Decimal no longer accepts negative and zero values
