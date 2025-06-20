@@ -2,6 +2,12 @@
 
 ## Pre-release
 
+### 0.10.1
+
+*Jun 20, 2025*
+
+* Decimal can be created from float
+
 ### 0.10.0
 
 *Jun 20, 2025*
