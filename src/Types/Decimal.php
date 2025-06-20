@@ -32,12 +32,12 @@ final readonly class Decimal
         if ($value instanceof Decimal) {
             return $value;
         }
-        if (is_float($value) && $value > 0) {
+        if (\is_float($value) && $value > 0) {
             $precision = 10 + (int)(ceil(-log10($value)));
             if ($precision < 0) {
                 $precision = 0;
             }
-            $value = sprintf("%0.{$precision}f", $value);
+            $value = \sprintf("%0.{$precision}f", $value);
             if (str_contains($value, '.')) {
                 $value = rtrim($value, '0');
             }
