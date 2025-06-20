@@ -2,6 +2,13 @@
 
 ## Pre-release
 
+### 0.10.0
+
+*Jun 20, 2025*
+
+* Removed deprecated Calculator methods
+* Added ``date`` to ``SuccessResponse`` 
+
 ### 0.9.1
 
 *Jun 19, 2025*
