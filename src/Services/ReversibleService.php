@@ -29,7 +29,7 @@ final readonly class ReversibleService implements ExchangeRateServiceInterface
             if ($innerResult->exception instanceof ConversionRateNotFoundException) {
                 $invertedResult = $this->service->send($request->invert());
                 if ($invertedResult instanceof SuccessResponse) {
-                    return new SuccessResponse(Calculator::invert($invertedResult->rate));
+                    return new SuccessResponse(Calculator::instance()->invert($invertedResult->rate), $invertedResult->date);
                 }
             }
             return $innerResult; // return the first result
