@@ -31,7 +31,7 @@ class ArrayServiceTest extends TestCase
         self::assertFalse($service->supports(new HistoricalExchangeRateRequest('EUR', 'USD', Date::today())));
 
         self::assertEquals(
-            new SuccessResponse(new Decimal('1.12345')),
+            new SuccessResponse(new Decimal('1.12345'), Date::today()),
             $service->send(new CurrentExchangeRateRequest('EUR', 'USD')),
         );
 
@@ -66,7 +66,7 @@ class ArrayServiceTest extends TestCase
         self::assertTrue($service->supports(new HistoricalExchangeRateRequest('EUR', 'USD', Date::today())));
 
         self::assertEquals(
-            new SuccessResponse(new Decimal('1.12345')),
+            new SuccessResponse(new Decimal('1.12345'), $date),
             $service->send(new HistoricalExchangeRateRequest('EUR', 'USD', $date)),
         );
 

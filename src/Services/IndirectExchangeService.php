@@ -36,9 +36,12 @@ final readonly class IndirectExchangeService implements ExchangeRateServiceInter
             return $response2;
         }
 
-        return new SuccessResponse(
-            Calculator::multiply($response1->rate, $response2->rate)
-        );
+        $date = $response1->date->compare($response2->date) < 0 ? $response1->date : $response2->date;
+
+        return new SuccessResponse(Calculator::instance()->multiply(
+            $response1->rate,
+            $response2->rate,
+        ), $date);
     }
 
     public function supports(object $request): bool

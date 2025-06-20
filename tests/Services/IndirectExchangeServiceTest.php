@@ -11,6 +11,7 @@ use Peso\Core\Requests\HistoricalExchangeRateRequest;
 use Peso\Core\Responses\ErrorResponse;
 use Peso\Core\Responses\SuccessResponse;
 use Peso\Core\Services\ArrayService;
+use Peso\Core\Services\ChainService;
 use Peso\Core\Services\IndirectExchangeService;
 use Peso\Core\Services\NullService;
 use Peso\Core\Services\ReversibleService;
@@ -151,5 +152,23 @@ class IndirectExchangeServiceTest extends TestCase
         $result = $service->send(new CurrentExchangeRateRequest('RUB', 'USD'));
         self::assertInstanceOf(ErrorResponse::class, $result);
         self::assertEquals('Unable to find exchange rate for RUB/EUR', $result->exception->getMessage());
+    }
+
+    public function testReturnSmallestDate(): void
+    {
+        $service1 = new ArrayService(
+            currentRates: ['EUR' => ['USD' => '1.125']],
+            currentDate: Calendar::parse('2025-06-13')
+        );
+        $service2 = new ArrayService(
+            currentRates: ['CZK' => ['EUR' => '0.04']],
+            currentDate: Calendar::parse('2025-06-20')
+        );
+        $service = new IndirectExchangeService(new ChainService($service1, $service2), 'EUR');
+
+        $response = $service->send(new CurrentExchangeRateRequest('CZK', 'USD'));
+        self::assertInstanceOf(SuccessResponse::class, $response);
+        self::assertEquals('0.04500', $response->rate->value);
+        self::assertEquals('2025-06-13', $response->date->toString());
     }
 }

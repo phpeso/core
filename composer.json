@@ -35,7 +35,7 @@
     },
     "require": {
         "php": "^8.2",
-        "arokettu/date": "^2.0",
+        "arokettu/date": "^2.4",
         "brick/math": ">=0.13 <0.14"
     },
     "require-dev": {
