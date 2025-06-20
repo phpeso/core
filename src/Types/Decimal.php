@@ -27,10 +27,20 @@ final readonly class Decimal
     /**
      * @param numeric-string|Decimal|Number|BigDecimal $value
      */
-    public static function init(string|Decimal|Number|BigDecimal $value): self
+    public static function init(string|float|Decimal|Number|BigDecimal $value): self
     {
         if ($value instanceof Decimal) {
             return $value;
+        }
+        if (is_float($value) && $value > 0) {
+            $precision = 10 + (int)(ceil(-log10($value)));
+            if ($precision < 0) {
+                $precision = 0;
+            }
+            $value = sprintf("%0.{$precision}f", $value);
+            if (str_contains($value, '.')) {
+                $value = rtrim($value, '0');
+            }
         }
 
         return new Decimal((string)$value);

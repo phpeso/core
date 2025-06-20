@@ -116,4 +116,13 @@ class DecimalTypeTest extends TestCase
         $number = BigDecimal::of('12.34');
         self::assertEquals('12.34', Decimal::init($number)->value);
     }
+
+    public function testAcceptsFloat(): void
+    {
+        self::assertEquals('123.45', Decimal::init(123.45)->value);
+        self::assertEquals('1.', Decimal::init(1)->value);
+        self::assertEquals('0.25', Decimal::init(0.25)->value);
+        self::assertEquals('1254456000000000000', Decimal::init(1.254456e18)->value);
+        self::assertEquals('0.000000000000000001254456', Decimal::init(1.254456e-18)->value);
+    }
 }
