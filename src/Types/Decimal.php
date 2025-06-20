@@ -6,6 +6,7 @@ namespace Peso\Core\Types;
 
 use BcMath\Number;
 use Brick\Math\BigDecimal;
+use Peso\Core\Helpers\Calculator;
 use ValueError;
 
 final readonly class Decimal
@@ -33,13 +34,17 @@ final readonly class Decimal
             return $value;
         }
         if (\is_float($value) && $value > 0) {
-            $precision = 10 + (int)(ceil(-log10($value)));
-            if ($precision < 0) {
-                $precision = 0;
-            }
-            $value = \sprintf("%0.{$precision}f", $value);
-            if (str_contains($value, '.')) {
-                $value = rtrim($value, '0');
+            if (preg_match('/^(\d+\.?\d*)(?:E([+-]?\d+))?$/i', (string)$value, $matches)) {
+                $decimal = new Decimal($matches[1]);
+                if (isset($matches[2])) { // scientific notation
+                    $exp = (int)$matches[2];
+                    $expValue = new Decimal(match ($exp <=> 0) {
+                        1, 0 => '1' . str_repeat('0', $exp),
+                        -1 => '0.' . str_repeat('0', -1 - $exp) . '1'
+                    });
+                    $decimal = Calculator::instance()->multiply($decimal, $expValue);
+                }
+                return $decimal;
             }
         }
 
