@@ -1,7 +1,7 @@
 {
     "name": "peso/core",
     "type": "library",
-    "description": "The core library of the Peso for PHP Framework",
+    "description": "The core library of the Peso Framework",
     "keywords": ["currency", "exchange", "conversion"],
     "homepage": "https://phpeso.readthedocs.io/",
     "license": "MIT",
