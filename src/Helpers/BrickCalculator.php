@@ -13,6 +13,8 @@ use Peso\Core\Types\Decimal;
  */
 final readonly class BrickCalculator implements CalculatorInterface
 {
+    use CalculatorCommonTrait;
+
     public function multiply(Decimal $x, Decimal $y): Decimal
     {
         return Decimal::init(BigDecimal::of($x->value)->multipliedBy(BigDecimal::of($y->value)));

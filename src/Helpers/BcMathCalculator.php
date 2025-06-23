@@ -13,6 +13,8 @@ use RoundingMode;
  */
 final readonly class BcMathCalculator implements CalculatorInterface
 {
+    use CalculatorCommonTrait;
+
     public function multiply(Decimal $x, Decimal $y): Decimal
     {
         return Decimal::init(new Number($x->value) * new Number($y->value));

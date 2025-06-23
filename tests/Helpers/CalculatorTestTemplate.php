@@ -64,4 +64,15 @@ abstract class CalculatorTestTemplate extends TestCase
 
         self::assertEquals('0.90000486003110440758', $calc->divide($x, $y)->value);
     }
+
+    public function testTrim(): void
+    {
+        $calc = $this->getCalculator();
+
+        self::assertEquals('0.001', $calc->trimZeros(new Decimal('0.00100000'))->value);
+        self::assertEquals('1000', $calc->trimZeros(new Decimal('1000'))->value);
+        self::assertEquals('1000', $calc->trimZeros(new Decimal('1000.'))->value);
+        self::assertEquals('1000', $calc->trimZeros(new Decimal('1000.0000'))->value);
+        self::assertEquals('1000.01', $calc->trimZeros(new Decimal('1000.0100'))->value);
+    }
 }
