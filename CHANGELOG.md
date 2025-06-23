@@ -2,6 +2,10 @@
 
 ## Pre-release
 
+### next
+
+* trimZeros in Calculator
+
 ### 0.10.1
 
 *Jun 20, 2025*
