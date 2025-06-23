@@ -37,6 +37,8 @@
 
 ### 0.1.5
 
+(untagged; 5aed5cb54121d35fcb1f6c9e17cfdf78af6bff60)
+
 *June 17, 2025*
 
 * ReverseService -> ReversibleService
@@ -44,11 +46,15 @@
 
 ### 0.1.4
 
+(untagged; 4daa8d1eb11a692df830fe8849745866305266f4)
+
 *June 14, 2025*
 
 * Store request and response in the HTTP exception
 
 ### 0.1.3
+
+(untagged; 3a465996945c405058bfa4b77cb020e9cf23f33c)
 
 *June 14, 2025*
 
@@ -56,17 +62,23 @@
 
 ### 0.1.2
 
+(untagged; 7f45df992655dc1e2a6a77a3dacfe97f0cb6fbec)
+
 *June 14, 2025*
 
 * RuntimeException
 
 ### 0.1.1
 
+(untagged; f643ae9a57fa53c21c9c5aefaa1c8de823e3690a)
+
 *June 14, 2025*
 
 * Separate `PesoException` and `PesoResponseException`
 
 ### 0.1.0 "Alpha 1"
+
+(untagged; 38e7a1e398dd2e37be50f4c7c86ac4fedc6efdef)
 
 *June 13, 2025*
  
