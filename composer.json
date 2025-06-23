@@ -1,5 +1,6 @@
 {
     "name": "peso/core",
+    "license": "MIT",
     "config": {
         "allow-plugins": {
             "dealerdirect/phpcodesniffer-composer-installer": true,
