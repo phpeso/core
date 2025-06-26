@@ -2,6 +2,12 @@
 
 ## Pre-release
 
+### 0.10.3
+
+*Jun 26, 2025*
+
+* Rename SuccessResponse to ExchangeRateResponse
+
 ### 0.10.2
 
 *Jun 23, 2025*
