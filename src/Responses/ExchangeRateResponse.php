@@ -15,3 +15,5 @@ final readonly class ExchangeRateResponse
     ) {
     }
 }
+
+class_exists(SuccessResponse::class);
