@@ -9,7 +9,7 @@ use Arokettu\Date\Date;
 use Peso\Core\Requests\CurrentExchangeRateRequest;
 use Peso\Core\Requests\HistoricalExchangeRateRequest;
 use Peso\Core\Responses\ErrorResponse;
-use Peso\Core\Responses\SuccessResponse;
+use Peso\Core\Responses\ExchangeRateResponse;
 use Peso\Core\Services\ArrayService;
 use Peso\Core\Services\ChainService;
 use Peso\Core\Services\IndirectExchangeService;
@@ -74,11 +74,11 @@ class IndirectExchangeServiceTest extends TestCase
         $date = Calendar::parse('2015-01-02');
 
         $response = $service->send(new CurrentExchangeRateRequest('EUR', 'USD'));
-        self::assertInstanceOf(SuccessResponse::class, $response);
+        self::assertInstanceOf(ExchangeRateResponse::class, $response);
         self::assertEquals('1.12345', $response->rate->value);
 
         $response = $service->send(new HistoricalExchangeRateRequest('EUR', 'USD', $date));
-        self::assertInstanceOf(SuccessResponse::class, $response);
+        self::assertInstanceOf(ExchangeRateResponse::class, $response);
         self::assertEquals('1.23456', $response->rate->value);
     }
 
@@ -98,12 +98,12 @@ class IndirectExchangeServiceTest extends TestCase
         $date = Calendar::parse('2015-01-02');
 
         $response = $service->send(new CurrentExchangeRateRequest('USD', 'EUR'));
-        self::assertInstanceOf(SuccessResponse::class, $response);
+        self::assertInstanceOf(ExchangeRateResponse::class, $response);
         // assert that BcMath and Brick handle precision the same way
         self::assertEquals('0.890115269927456', $response->rate->value);
 
         $response = $service->send(new HistoricalExchangeRateRequest('USD', 'EUR', $date));
-        self::assertInstanceOf(SuccessResponse::class, $response);
+        self::assertInstanceOf(ExchangeRateResponse::class, $response);
         self::assertEquals('0.810005184033178', $response->rate->value);
     }
 
@@ -123,11 +123,11 @@ class IndirectExchangeServiceTest extends TestCase
         $date = Calendar::parse('2015-01-02');
 
         $response = $service->send(new CurrentExchangeRateRequest('GBP', 'USD'));
-        self::assertInstanceOf(SuccessResponse::class, $response);
+        self::assertInstanceOf(ExchangeRateResponse::class, $response);
         self::assertEquals('1.49793333333295885', $response->rate->value); // 1.333333333333 (rounded) * 1.12345
 
         $response = $service->send(new HistoricalExchangeRateRequest('GBP', 'USD', $date));
-        self::assertInstanceOf(SuccessResponse::class, $response);
+        self::assertInstanceOf(ExchangeRateResponse::class, $response);
         self::assertEquals('1.5432000000000000', $response->rate->value);
     }
 
@@ -167,7 +167,7 @@ class IndirectExchangeServiceTest extends TestCase
         $service = new IndirectExchangeService(new ChainService($service1, $service2), 'EUR');
 
         $response = $service->send(new CurrentExchangeRateRequest('CZK', 'USD'));
-        self::assertInstanceOf(SuccessResponse::class, $response);
+        self::assertInstanceOf(ExchangeRateResponse::class, $response);
         self::assertEquals('0.04500', $response->rate->value);
         self::assertEquals('2025-06-13', $response->date->toString());
     }

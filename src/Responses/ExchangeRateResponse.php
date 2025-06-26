@@ -7,7 +7,7 @@ namespace Peso\Core\Responses;
 use Arokettu\Date\Date;
 use Peso\Core\Types\Decimal;
 
-final readonly class SuccessResponse
+final readonly class ExchangeRateResponse
 {
     public function __construct(
         public Decimal $rate,

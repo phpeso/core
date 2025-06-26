@@ -6,7 +6,7 @@ namespace Peso\Core\Services;
 
 use Peso\Core\Exceptions\NoSuitableServiceFoundException;
 use Peso\Core\Responses\ErrorResponse;
-use Peso\Core\Responses\SuccessResponse;
+use Peso\Core\Responses\ExchangeRateResponse;
 use ValueError;
 
 final readonly class ChainService implements ExchangeRateServiceInterface
@@ -23,13 +23,13 @@ final readonly class ChainService implements ExchangeRateServiceInterface
         $this->services = $services;
     }
 
-    public function send(object $request): SuccessResponse|ErrorResponse
+    public function send(object $request): ExchangeRateResponse|ErrorResponse
     {
         $errors = [];
 
         foreach ($this->services as $service) {
             $response = $service->send($request);
-            if ($response instanceof SuccessResponse) {
+            if ($response instanceof ExchangeRateResponse) {
                 return $response;
             }
             $errors[] = $response->exception;

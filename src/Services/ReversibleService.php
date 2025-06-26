@@ -10,7 +10,7 @@ use Peso\Core\Helpers\Calculator;
 use Peso\Core\Requests\CurrentExchangeRateRequest;
 use Peso\Core\Requests\HistoricalExchangeRateRequest;
 use Peso\Core\Responses\ErrorResponse;
-use Peso\Core\Responses\SuccessResponse;
+use Peso\Core\Responses\ExchangeRateResponse;
 
 final readonly class ReversibleService implements ExchangeRateServiceInterface
 {
@@ -19,17 +19,17 @@ final readonly class ReversibleService implements ExchangeRateServiceInterface
     ) {
     }
 
-    public function send(object $request): SuccessResponse|ErrorResponse
+    public function send(object $request): ExchangeRateResponse|ErrorResponse
     {
         if ($request instanceof CurrentExchangeRateRequest || $request instanceof HistoricalExchangeRateRequest) {
             $innerResult = $this->service->send($request);
-            if ($innerResult instanceof SuccessResponse) {
+            if ($innerResult instanceof ExchangeRateResponse) {
                 return $innerResult;
             }
             if ($innerResult->exception instanceof ConversionRateNotFoundException) {
                 $invertedResult = $this->service->send($request->invert());
-                if ($invertedResult instanceof SuccessResponse) {
-                    return new SuccessResponse(
+                if ($invertedResult instanceof ExchangeRateResponse) {
+                    return new ExchangeRateResponse(
                         Calculator::instance()->invert($invertedResult->rate),
                         $invertedResult->date
                     );

@@ -8,7 +8,7 @@ use Peso\Core\Helpers\Calculator;
 use Peso\Core\Requests\CurrentExchangeRateRequest;
 use Peso\Core\Requests\HistoricalExchangeRateRequest;
 use Peso\Core\Responses\ErrorResponse;
-use Peso\Core\Responses\SuccessResponse;
+use Peso\Core\Responses\ExchangeRateResponse;
 
 final readonly class IndirectExchangeService implements ExchangeRateServiceInterface
 {
@@ -18,7 +18,7 @@ final readonly class IndirectExchangeService implements ExchangeRateServiceInter
     ) {
     }
 
-    public function send(object $request): SuccessResponse|ErrorResponse
+    public function send(object $request): ExchangeRateResponse|ErrorResponse
     {
         if ($request->baseCurrency === $this->baseCurrency || $request->quoteCurrency === $this->baseCurrency) {
             return $this->service->send($request);
@@ -38,7 +38,7 @@ final readonly class IndirectExchangeService implements ExchangeRateServiceInter
 
         $date = $response1->date->compare($response2->date) < 0 ? $response1->date : $response2->date;
 
-        return new SuccessResponse(Calculator::instance()->multiply(
+        return new ExchangeRateResponse(Calculator::instance()->multiply(
             $response1->rate,
             $response2->rate,
         ), $date);

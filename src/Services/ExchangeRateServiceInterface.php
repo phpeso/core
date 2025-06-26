@@ -6,14 +6,14 @@ namespace Peso\Core\Services;
 
 use Peso\Core\Exceptions\RuntimeException;
 use Peso\Core\Responses\ErrorResponse;
-use Peso\Core\Responses\SuccessResponse;
+use Peso\Core\Responses\ExchangeRateResponse;
 
 interface ExchangeRateServiceInterface
 {
     /**
      * @throws RuntimeException
      */
-    public function send(object $request): SuccessResponse|ErrorResponse;
+    public function send(object $request): ExchangeRateResponse|ErrorResponse;
 
     /**
      */

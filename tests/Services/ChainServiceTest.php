@@ -11,7 +11,7 @@ use Peso\Core\Exceptions\RequestNotSupportedException;
 use Peso\Core\Requests\CurrentExchangeRateRequest;
 use Peso\Core\Requests\HistoricalExchangeRateRequest;
 use Peso\Core\Responses\ErrorResponse;
-use Peso\Core\Responses\SuccessResponse;
+use Peso\Core\Responses\ExchangeRateResponse;
 use Peso\Core\Services\ArrayService;
 use Peso\Core\Services\ChainService;
 use Peso\Core\Services\NullService;
@@ -36,7 +36,7 @@ class ChainServiceTest extends TestCase
         self::assertTrue($service->supports($request));
 
         $response = $service->send($request);
-        self::assertInstanceOf(SuccessResponse::class, $response);
+        self::assertInstanceOf(ExchangeRateResponse::class, $response);
         self::assertEquals('1.12345', $response->rate->value);
     }
 

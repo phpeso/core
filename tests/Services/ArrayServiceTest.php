@@ -11,7 +11,7 @@ use Peso\Core\Exceptions\RequestNotSupportedException;
 use Peso\Core\Requests\CurrentExchangeRateRequest;
 use Peso\Core\Requests\HistoricalExchangeRateRequest;
 use Peso\Core\Responses\ErrorResponse;
-use Peso\Core\Responses\SuccessResponse;
+use Peso\Core\Responses\ExchangeRateResponse;
 use Peso\Core\Services\ArrayService;
 use Peso\Core\Types\Decimal;
 use PHPUnit\Framework\TestCase;
@@ -31,7 +31,7 @@ class ArrayServiceTest extends TestCase
         self::assertFalse($service->supports(new HistoricalExchangeRateRequest('EUR', 'USD', Date::today())));
 
         self::assertEquals(
-            new SuccessResponse(new Decimal('1.12345'), Date::today()),
+            new ExchangeRateResponse(new Decimal('1.12345'), Date::today()),
             $service->send(new CurrentExchangeRateRequest('EUR', 'USD')),
         );
 
@@ -66,7 +66,7 @@ class ArrayServiceTest extends TestCase
         self::assertTrue($service->supports(new HistoricalExchangeRateRequest('EUR', 'USD', Date::today())));
 
         self::assertEquals(
-            new SuccessResponse(new Decimal('1.12345'), $date),
+            new ExchangeRateResponse(new Decimal('1.12345'), $date),
             $service->send(new HistoricalExchangeRateRequest('EUR', 'USD', $date)),
         );
 

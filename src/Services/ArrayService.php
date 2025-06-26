@@ -12,7 +12,7 @@ use Peso\Core\Exceptions\RequestNotSupportedException;
 use Peso\Core\Requests\CurrentExchangeRateRequest;
 use Peso\Core\Requests\HistoricalExchangeRateRequest;
 use Peso\Core\Responses\ErrorResponse;
-use Peso\Core\Responses\SuccessResponse;
+use Peso\Core\Responses\ExchangeRateResponse;
 use Peso\Core\Types\Decimal;
 
 // can't write it shorter
@@ -33,19 +33,19 @@ final readonly class ArrayService implements ExchangeRateServiceInterface
         $this->currentDate = $currentDate ?? Date::today();
     }
 
-    public function send(object $request): SuccessResponse|ErrorResponse
+    public function send(object $request): ExchangeRateResponse|ErrorResponse
     {
         return match (true) {
             $request instanceof CurrentExchangeRateRequest
                 => isset($this->currentRates[$request->baseCurrency][$request->quoteCurrency]) ?
-                    new SuccessResponse(
+                    new ExchangeRateResponse(
                         Decimal::init($this->currentRates[$request->baseCurrency][$request->quoteCurrency]),
                         $this->currentDate
                     ) :
                     new ErrorResponse(ConversionRateNotFoundException::fromRequest($request)),
             $request instanceof HistoricalExchangeRateRequest
                 => isset($this->historicalRates[$request->date->toString()][$request->baseCurrency][$request->quoteCurrency]) ?
-                    new SuccessResponse(
+                    new ExchangeRateResponse(
                         Decimal::init($this->historicalRates[$request->date->toString()][$request->baseCurrency][$request->quoteCurrency]),
                         $request->date
                     ) :
