@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.x
+
+### 1.0.0
+
+*Jun 26, 2025*
+
+* Removed SuccessResponse alias to ExchangeRateResponse
+
 ## Pre-release
 
 ### 0.10.3
