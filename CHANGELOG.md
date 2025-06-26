@@ -10,6 +10,12 @@
 
 ## Pre-release
 
+### 0.10.4
+
+*Jun 27, 2025*
+
+* Fix alias not recognized in instanceof checks
+
 ### 0.10.3
 
 *Jun 26, 2025*
