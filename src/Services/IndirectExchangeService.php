@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Peso\Core\Services;
 
 use Override;
+use Peso\Core\Exceptions\RequestNotSupportedException;
 use Peso\Core\Helpers\Calculator;
 use Peso\Core\Requests\CurrentExchangeRateRequest;
 use Peso\Core\Requests\HistoricalExchangeRateRequest;
@@ -22,6 +23,10 @@ final readonly class IndirectExchangeService implements ExchangeRateServiceInter
     #[Override]
     public function send(object $request): ExchangeRateResponse|ErrorResponse
     {
+        if (!$request instanceof CurrentExchangeRateRequest && !$request instanceof HistoricalExchangeRateRequest) {
+            return new ErrorResponse(RequestNotSupportedException::fromRequest($request));
+        }
+
         if ($request->baseCurrency === $this->baseCurrency || $request->quoteCurrency === $this->baseCurrency) {
             return $this->service->send($request);
         }
@@ -41,8 +46,8 @@ final readonly class IndirectExchangeService implements ExchangeRateServiceInter
         $date = $response1->date->compare($response2->date) < 0 ? $response1->date : $response2->date;
 
         return new ExchangeRateResponse(Calculator::instance()->multiply(
-            $response1->amount,
-            $response2->amount,
+            $response1->rate,
+            $response2->rate,
         ), $date);
     }
 
