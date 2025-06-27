@@ -26,7 +26,7 @@ final readonly class Decimal
     }
 
     /**
-     * @param numeric-string|Decimal|Number|BigDecimal $value
+     * @param numeric-string|float|Decimal|Number|BigDecimal $value
      */
     public static function init(string|float|Decimal|Number|BigDecimal $value): self
     {
