@@ -23,10 +23,9 @@ final readonly class ArrayService implements ExchangeRateServiceInterface
     private Date $currentDate;
 
     /**
-     * @param array<non-empty-string, array<non-empty-string, numeric-string|Decimal|Number|BigDecimal>> $currentRates
-     * @param array<non-empty-string, array<non-empty-string, array<non-empty-string, numeric-string|Decimal|Number|BigDecimal>> $historicalRates
+     * @param array<non-empty-string, array<non-empty-string, numeric-string|float|Decimal|Number|BigDecimal>> $currentRates
+     * @param array<non-empty-string, array<non-empty-string, array<non-empty-string, numeric-string|float|Decimal|Number|BigDecimal>>> $historicalRates
      */
-    #[Override]
     public function __construct(
         public array $currentRates = [],
         public array $historicalRates = [],
@@ -58,6 +57,7 @@ final readonly class ArrayService implements ExchangeRateServiceInterface
         };
     }
 
+    #[Override]
     public function supports(object $request): bool
     {
         return

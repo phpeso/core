@@ -8,3 +8,6 @@
 # QA
 /reports
 /.phpunit.result.cache
+
+# misc dev
+/debug

@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace Peso\Core\Services;
 
 use Peso\Core\Exceptions\RuntimeException;
+use Peso\Core\Requests\CurrentConversionRequest;
 use Peso\Core\Requests\CurrentExchangeRateRequest;
+use Peso\Core\Requests\HistoricalConversionRequest;
 use Peso\Core\Requests\HistoricalExchangeRateRequest;
+use Peso\Core\Responses\ConversionResponse;
 use Peso\Core\Responses\ErrorResponse;
 use Peso\Core\Responses\ExchangeRateResponse;
 
@@ -17,12 +20,14 @@ interface ExchangeRateServiceInterface
      * @param T $request
      * @return (
      *      T is CurrentExchangeRateRequest ? ExchangeRateResponse|ErrorResponse : (
-     *      T is HistoricalExchangeRateRequest ? ExchangeRateResponse|ErrorResponse :
+     *      T is HistoricalExchangeRateRequest ? ExchangeRateResponse|ErrorResponse : (
+     *      T is CurrentConversionRequest ? ConversionResponse|ErrorResponse : (
+     *      T is HistoricalConversionRequest ? ConversionResponse|ErrorResponse : (
      *      ErrorResponse
-     * ))
+     * )))))
      * @throws RuntimeException
      */
-    public function send(object $request): ExchangeRateResponse|ErrorResponse;
+    public function send(object $request): ExchangeRateResponse|ConversionResponse|ErrorResponse;
 
     /**
      */

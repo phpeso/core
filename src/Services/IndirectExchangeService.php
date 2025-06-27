@@ -41,8 +41,8 @@ final readonly class IndirectExchangeService implements ExchangeRateServiceInter
         $date = $response1->date->compare($response2->date) < 0 ? $response1->date : $response2->date;
 
         return new ExchangeRateResponse(Calculator::instance()->multiply(
-            $response1->rate,
-            $response2->rate,
+            $response1->amount,
+            $response2->amount,
         ), $date);
     }
 
