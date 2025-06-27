@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Peso\Core\Services;
 
+use Override;
 use Peso\Core\Helpers\Calculator;
 use Peso\Core\Requests\CurrentExchangeRateRequest;
 use Peso\Core\Requests\HistoricalExchangeRateRequest;
@@ -18,6 +19,7 @@ final readonly class IndirectExchangeService implements ExchangeRateServiceInter
     ) {
     }
 
+    #[Override]
     public function send(object $request): ExchangeRateResponse|ErrorResponse
     {
         if ($request->baseCurrency === $this->baseCurrency || $request->quoteCurrency === $this->baseCurrency) {
@@ -44,6 +46,7 @@ final readonly class IndirectExchangeService implements ExchangeRateServiceInter
         ), $date);
     }
 
+    #[Override]
     public function supports(object $request): bool
     {
         if (!$request instanceof CurrentExchangeRateRequest && !$request instanceof HistoricalExchangeRateRequest) {
