@@ -32,3 +32,5 @@ final class ExchangeRateNotFoundException extends PesoResponseException
         }, previous: $previous);
     }
 }
+
+class_exists(ConversionRateNotFoundException::class);
