@@ -2,6 +2,16 @@
 
 ## 1.x
 
+### 1.1.0
+
+*Jun 30, 2025*
+
+* CurrentConversionRequest and HistoricalConversionRequest
+* ConversionService
+* Fixed IndirectExchangeService not checking request classes
+* ConversionRateNotFoundException renamed to ExchangeRateNotFoundException
+* ExchangeRateServiceInterface renamed to PesoServiceInterface
+
 ### 1.0.0
 
 *Jun 26, 2025*
