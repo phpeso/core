@@ -6,7 +6,7 @@ namespace Peso\Core\Tests\Services;
 
 use Arokettu\Date\Calendar;
 use Arokettu\Date\Date;
-use Peso\Core\Exceptions\ConversionRateNotFoundException;
+use Peso\Core\Exceptions\ExchangeRateNotFoundException;
 use Peso\Core\Exceptions\RequestNotSupportedException;
 use Peso\Core\Requests\CurrentExchangeRateRequest;
 use Peso\Core\Requests\HistoricalExchangeRateRequest;
@@ -92,7 +92,7 @@ class ReversibleServiceTest extends TestCase
 
         $response = $service->send(new CurrentExchangeRateRequest('ZAR', 'BYN'));
         self::assertInstanceOf(ErrorResponse::class, $response);
-        self::assertInstanceOf(ConversionRateNotFoundException::class, $response->exception);
+        self::assertInstanceOf(ExchangeRateNotFoundException::class, $response->exception);
         // shows the error from the direct conversion
         self::assertEquals('Unable to find exchange rate for ZAR/BYN', $response->exception->getMessage());
     }

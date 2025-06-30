@@ -8,7 +8,7 @@ use Arokettu\Date\Date;
 use BcMath\Number;
 use Brick\Math\BigDecimal;
 use Override;
-use Peso\Core\Exceptions\ConversionRateNotFoundException;
+use Peso\Core\Exceptions\ExchangeRateNotFoundException;
 use Peso\Core\Exceptions\RequestNotSupportedException;
 use Peso\Core\Requests\CurrentExchangeRateRequest;
 use Peso\Core\Requests\HistoricalExchangeRateRequest;
@@ -44,14 +44,14 @@ final readonly class ArrayService implements ExchangeRateServiceInterface
                         Decimal::init($this->currentRates[$request->baseCurrency][$request->quoteCurrency]),
                         $this->currentDate
                     ) :
-                    new ErrorResponse(ConversionRateNotFoundException::fromRequest($request)),
+                    new ErrorResponse(ExchangeRateNotFoundException::fromRequest($request)),
             $request instanceof HistoricalExchangeRateRequest
                 => isset($this->historicalRates[$request->date->toString()][$request->baseCurrency][$request->quoteCurrency]) ?
                     new ExchangeRateResponse(
                         Decimal::init($this->historicalRates[$request->date->toString()][$request->baseCurrency][$request->quoteCurrency]),
                         $request->date
                     ) :
-                    new ErrorResponse(ConversionRateNotFoundException::fromRequest($request)),
+                    new ErrorResponse(ExchangeRateNotFoundException::fromRequest($request)),
             default
                 => new ErrorResponse(RequestNotSupportedException::fromRequest($request)),
         };

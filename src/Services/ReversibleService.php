@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Peso\Core\Services;
 
 use Override;
-use Peso\Core\Exceptions\ConversionRateNotFoundException;
+use Peso\Core\Exceptions\ExchangeRateNotFoundException;
 use Peso\Core\Exceptions\RequestNotSupportedException;
 use Peso\Core\Helpers\Calculator;
 use Peso\Core\Requests\CurrentExchangeRateRequest;
@@ -28,7 +28,7 @@ final readonly class ReversibleService implements ExchangeRateServiceInterface
             if ($innerResult instanceof ExchangeRateResponse) {
                 return $innerResult;
             }
-            if ($innerResult->exception instanceof ConversionRateNotFoundException) {
+            if ($innerResult->exception instanceof ExchangeRateNotFoundException) {
                 $invertedResult = $this->service->send($request->invert());
                 if ($invertedResult instanceof ExchangeRateResponse) {
                     return new ExchangeRateResponse(

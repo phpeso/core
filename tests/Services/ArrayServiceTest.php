@@ -6,7 +6,7 @@ namespace Peso\Core\Tests\Services;
 
 use Arokettu\Date\Calendar;
 use Arokettu\Date\Date;
-use Peso\Core\Exceptions\ConversionRateNotFoundException;
+use Peso\Core\Exceptions\ExchangeRateNotFoundException;
 use Peso\Core\Exceptions\RequestNotSupportedException;
 use Peso\Core\Requests\CurrentExchangeRateRequest;
 use Peso\Core\Requests\HistoricalExchangeRateRequest;
@@ -38,13 +38,13 @@ class ArrayServiceTest extends TestCase
         // no quote
         $error = $service->send(new CurrentExchangeRateRequest('EUR', 'ZAR'));
         self::assertInstanceOf(ErrorResponse::class, $error);
-        self::assertInstanceOf(ConversionRateNotFoundException::class, $error->exception);
+        self::assertInstanceOf(ExchangeRateNotFoundException::class, $error->exception);
         self::assertEquals('Unable to find exchange rate for EUR/ZAR', $error->exception->getMessage());
 
         // no base
         $error = $service->send(new CurrentExchangeRateRequest('ZAR', 'USD'));
         self::assertInstanceOf(ErrorResponse::class, $error);
-        self::assertInstanceOf(ConversionRateNotFoundException::class, $error->exception);
+        self::assertInstanceOf(ExchangeRateNotFoundException::class, $error->exception);
         self::assertEquals('Unable to find exchange rate for ZAR/USD', $error->exception->getMessage());
 
         // unknown request
@@ -73,13 +73,13 @@ class ArrayServiceTest extends TestCase
         // no quote
         $error = $service->send(new HistoricalExchangeRateRequest('EUR', 'ZAR', $date));
         self::assertInstanceOf(ErrorResponse::class, $error);
-        self::assertInstanceOf(ConversionRateNotFoundException::class, $error->exception);
+        self::assertInstanceOf(ExchangeRateNotFoundException::class, $error->exception);
         self::assertEquals('Unable to find exchange rate for EUR/ZAR on 2015-01-02', $error->exception->getMessage());
 
         // no base
         $error = $service->send(new HistoricalExchangeRateRequest('ZAR', 'USD', $date));
         self::assertInstanceOf(ErrorResponse::class, $error);
-        self::assertInstanceOf(ConversionRateNotFoundException::class, $error->exception);
+        self::assertInstanceOf(ExchangeRateNotFoundException::class, $error->exception);
         self::assertEquals('Unable to find exchange rate for ZAR/USD on 2015-01-02', $error->exception->getMessage());
 
         // unknown request

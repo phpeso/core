@@ -11,7 +11,7 @@ use Throwable;
 /**
  * The request was understood but the specific pair was not found
  */
-final class ConversionRateNotFoundException extends PesoResponseException
+final class ExchangeRateNotFoundException extends PesoResponseException
 {
     public static function fromRequest(
         CurrentExchangeRateRequest|HistoricalExchangeRateRequest $request,
