@@ -6,7 +6,10 @@ namespace Peso\Core\Tests\Services;
 
 use Arokettu\Date\Calendar;
 use Arokettu\Date\Date;
+use Peso\Core\Exceptions\RequestNotSupportedException;
+use Peso\Core\Requests\CurrentConversionRequest;
 use Peso\Core\Requests\CurrentExchangeRateRequest;
+use Peso\Core\Requests\HistoricalConversionRequest;
 use Peso\Core\Requests\HistoricalExchangeRateRequest;
 use Peso\Core\Responses\ErrorResponse;
 use Peso\Core\Responses\ExchangeRateResponse;
@@ -15,6 +18,7 @@ use Peso\Core\Services\ChainService;
 use Peso\Core\Services\IndirectExchangeService;
 use Peso\Core\Services\NullService;
 use Peso\Core\Services\ReversibleService;
+use Peso\Core\Types\Decimal;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use stdClass;
@@ -170,5 +174,44 @@ final class IndirectExchangeServiceTest extends TestCase
         self::assertInstanceOf(ExchangeRateResponse::class, $response);
         self::assertEquals('0.04500', $response->rate->value);
         self::assertEquals('2025-06-13', $response->date->toString());
+    }
+
+    public function testUnsupportedRequest(): void
+    {
+        $service = new IndirectExchangeService(new ArrayService(
+            currentRates: ['EUR' => ['USD' => '1.12345']],
+            historicalRates: [
+                '2015-01-02' => ['EUR' => ['USD' => '1.23456']]
+            ],
+        ), 'EUR');
+
+        $response = $service->send(new CurrentConversionRequest(new Decimal('1'), 'EUR', 'EUR'));
+
+        self::assertInstanceOf(ErrorResponse::class, $response);
+        self::assertInstanceOf(RequestNotSupportedException::class, $response->exception);
+        self::assertEquals(
+            'Unsupported request type: "Peso\Core\Requests\CurrentConversionRequest"',
+            $response->exception->getMessage(),
+        );
+    }
+
+    public function testSupports(): void
+    {
+        $service = new IndirectExchangeService(new ArrayService(
+            currentRates: ['EUR' => ['USD' => '1.12345']],
+            historicalRates: [
+                '2015-01-02' => ['EUR' => ['USD' => '1.23456']]
+            ],
+        ), 'EUR');
+        $date = Date::today();
+        $amount = Decimal::init(1000);
+
+        self::assertTrue($service->supports(new CurrentExchangeRateRequest('PHP', 'BTC')));
+        self::assertTrue($service->supports(new HistoricalExchangeRateRequest('PHP', 'BTC', $date)));
+
+        self::assertFalse($service->supports(new CurrentConversionRequest($amount, 'PHP', 'BTC')));
+        self::assertFalse($service->supports(new HistoricalConversionRequest($amount, 'PHP', 'BTC', $date)));
+
+        self::assertFalse($service->supports(new stdClass()));
     }
 }

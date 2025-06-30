@@ -23,7 +23,9 @@ use stdClass;
 
 #[CoversClass(ConversionService::class)]
 #[CoversClass(CurrentConversionRequest::class)]
-#[CoversClass(HistoricalConversionRequest::class)] // inversion
+#[CoversClass(HistoricalConversionRequest::class)]
+#[CoversClass(ConversionResponse::class)]
+#[CoversClass(ConversionNotPerformedException::class)]
 final class ConversionTest extends TestCase
 {
     public function testCurrentConversion(): void
