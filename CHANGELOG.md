@@ -2,6 +2,12 @@
 
 ## 1.x
 
+### 1.1.1
+
+*Jul 1, 2025*
+
+* Fixed ChainService not supporting chaining of converters
+
 ### 1.1.0
 
 *Jun 30, 2025*
