@@ -33,3 +33,7 @@ interface PesoServiceInterface
      */
     public function supports(object $request): bool;
 }
+
+// phpcs:disable PSR1.Files.SideEffects.FoundWithSymbols
+// load alias
+class_exists(ExchangeRateServiceInterface::class);
