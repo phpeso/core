@@ -14,10 +14,10 @@ use Peso\Core\Requests\HistoricalExchangeRateRequest;
 use Peso\Core\Responses\ConversionResponse;
 use Peso\Core\Responses\ErrorResponse;
 
-final readonly class ConversionService implements ExchangeRateServiceInterface
+final readonly class ConversionService implements PesoServiceInterface
 {
     public function __construct(
-        private ExchangeRateServiceInterface $service,
+        private PesoServiceInterface $service,
     ) {
     }
 

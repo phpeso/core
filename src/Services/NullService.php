@@ -8,7 +8,7 @@ use Override;
 use Peso\Core\Exceptions\RequestNotSupportedException;
 use Peso\Core\Responses\ErrorResponse;
 
-final readonly class NullService implements ExchangeRateServiceInterface
+final readonly class NullService implements PesoServiceInterface
 {
     #[Override]
     public function send(object $request): ErrorResponse

@@ -10,13 +10,13 @@ use Peso\Core\Responses\ErrorResponse;
 use Peso\Core\Responses\ExchangeRateResponse;
 use ValueError;
 
-final readonly class ChainService implements ExchangeRateServiceInterface
+final readonly class ChainService implements PesoServiceInterface
 {
-    /** @var list<ExchangeRateServiceInterface> */
+    /** @var list<PesoServiceInterface> */
     private array $services;
 
     public function __construct(
-        ExchangeRateServiceInterface ...$services,
+        PesoServiceInterface ...$services,
     ) {
         if ($services === []) {
             throw new ValueError('List of services must be non-empty');

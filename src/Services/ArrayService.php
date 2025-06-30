@@ -18,7 +18,7 @@ use Peso\Core\Types\Decimal;
 
 // can't write it shorter
 // phpcs:disable Generic.Files.LineLength.TooLong
-final readonly class ArrayService implements ExchangeRateServiceInterface
+final readonly class ArrayService implements PesoServiceInterface
 {
     private Date $currentDate;
 

@@ -12,10 +12,10 @@ use Peso\Core\Requests\HistoricalExchangeRateRequest;
 use Peso\Core\Responses\ErrorResponse;
 use Peso\Core\Responses\ExchangeRateResponse;
 
-final readonly class IndirectExchangeService implements ExchangeRateServiceInterface
+final readonly class IndirectExchangeService implements PesoServiceInterface
 {
     public function __construct(
-        private ExchangeRateServiceInterface $service,
+        private PesoServiceInterface $service,
         private string $baseCurrency,
     ) {
     }

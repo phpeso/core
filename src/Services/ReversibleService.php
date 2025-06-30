@@ -13,10 +13,10 @@ use Peso\Core\Requests\HistoricalExchangeRateRequest;
 use Peso\Core\Responses\ErrorResponse;
 use Peso\Core\Responses\ExchangeRateResponse;
 
-final readonly class ReversibleService implements ExchangeRateServiceInterface
+final readonly class ReversibleService implements PesoServiceInterface
 {
     public function __construct(
-        private ExchangeRateServiceInterface $service,
+        private PesoServiceInterface $service,
     ) {
     }
 

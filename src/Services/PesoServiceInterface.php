@@ -13,7 +13,7 @@ use Peso\Core\Responses\ConversionResponse;
 use Peso\Core\Responses\ErrorResponse;
 use Peso\Core\Responses\ExchangeRateResponse;
 
-interface ExchangeRateServiceInterface
+interface PesoServiceInterface
 {
     /**
      * @template T of object
