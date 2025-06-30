@@ -13,6 +13,6 @@ final class RequestNotSupportedException extends PesoResponseException
 {
     public static function fromRequest(object $request, Throwable|null $previous = null): self
     {
-        return new self(\sprintf('Unrecognized request type: "%s"', get_debug_type($request)), previous: $previous);
+        return new self(\sprintf('Unsupported request type: "%s"', get_debug_type($request)), previous: $previous);
     }
 }
