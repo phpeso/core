@@ -26,7 +26,7 @@ class NullServiceTest extends TestCase
         self::assertInstanceOf(ErrorResponse::class, $error);
         self::assertInstanceOf(RequestNotSupportedException::class, $error->exception);
         self::assertEquals(
-            'Unrecognized request type: "Peso\Core\Requests\CurrentExchangeRateRequest"',
+            'Unsupported request type: "Peso\Core\Requests\CurrentExchangeRateRequest"',
             $error->exception->getMessage()
         );
 
@@ -36,7 +36,7 @@ class NullServiceTest extends TestCase
         self::assertInstanceOf(ErrorResponse::class, $error);
         self::assertInstanceOf(RequestNotSupportedException::class, $error->exception);
         self::assertEquals(
-            'Unrecognized request type: "Peso\Core\Requests\HistoricalExchangeRateRequest"',
+            'Unsupported request type: "Peso\Core\Requests\HistoricalExchangeRateRequest"',
             $error->exception->getMessage()
         );
 
@@ -45,6 +45,6 @@ class NullServiceTest extends TestCase
         $error = $service->send($request);
         self::assertInstanceOf(ErrorResponse::class, $error);
         self::assertInstanceOf(RequestNotSupportedException::class, $error->exception);
-        self::assertEquals('Unrecognized request type: "stdClass"', $error->exception->getMessage());
+        self::assertEquals('Unsupported request type: "stdClass"', $error->exception->getMessage());
     }
 }

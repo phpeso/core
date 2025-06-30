@@ -109,6 +109,6 @@ class ReversibleServiceTest extends TestCase
         self::assertInstanceOf(ErrorResponse::class, $response);
         self::assertInstanceOf(RequestNotSupportedException::class, $response->exception);
         // shows the error from the direct conversion
-        self::assertEquals('Unrecognized request type: "stdClass"', $response->exception->getMessage());
+        self::assertEquals('Unsupported request type: "stdClass"', $response->exception->getMessage());
     }
 }

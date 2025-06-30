@@ -51,7 +51,7 @@ class ArrayServiceTest extends TestCase
         $error = $service->send(new stdClass());
         self::assertInstanceOf(ErrorResponse::class, $error);
         self::assertInstanceOf(RequestNotSupportedException::class, $error->exception);
-        self::assertEquals('Unrecognized request type: "stdClass"', $error->exception->getMessage());
+        self::assertEquals('Unsupported request type: "stdClass"', $error->exception->getMessage());
     }
 
     public function testHistorical(): void
@@ -86,6 +86,6 @@ class ArrayServiceTest extends TestCase
         $error = $service->send(new stdClass());
         self::assertInstanceOf(ErrorResponse::class, $error);
         self::assertInstanceOf(RequestNotSupportedException::class, $error->exception);
-        self::assertEquals('Unrecognized request type: "stdClass"', $error->exception->getMessage());
+        self::assertEquals('Unsupported request type: "stdClass"', $error->exception->getMessage());
     }
 }
