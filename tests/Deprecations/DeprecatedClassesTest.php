@@ -13,7 +13,6 @@ use Peso\Core\Responses\ExchangeRateResponse;
 use Peso\Core\Services\ExchangeRateServiceInterface;
 use Peso\Core\Services\PesoServiceInterface;
 use PHPUnit\Framework\TestCase;
-use function PHPUnit\Framework\assertInstanceOf;
 
 final class DeprecatedClassesTest extends TestCase
 {
@@ -43,7 +42,7 @@ final class DeprecatedClassesTest extends TestCase
             }
         };
 
-        assertInstanceOf(ExchangeRateServiceInterface::class, $service);
+        self::assertInstanceOf(ExchangeRateServiceInterface::class, $service);
 
         $service = new class implements ExchangeRateServiceInterface
         {
@@ -58,6 +57,6 @@ final class DeprecatedClassesTest extends TestCase
             }
         };
 
-        assertInstanceOf(PesoServiceInterface::class, $service);
+        self::assertInstanceOf(PesoServiceInterface::class, $service);
     }
 }

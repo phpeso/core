@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Peso\Core\Services;
 
 use Override;
+use Peso\Core\Exceptions\ConversionNotPerformedException;
 use Peso\Core\Exceptions\RequestNotSupportedException;
 use Peso\Core\Helpers\Calculator;
 use Peso\Core\Requests\CurrentConversionRequest;
@@ -41,7 +42,7 @@ final readonly class ConversionService implements PesoServiceInterface
         $subResponse = $this->service->send($subRequest);
 
         if ($subResponse instanceof ErrorResponse) {
-            return $subResponse;
+            return new ErrorResponse(ConversionNotPerformedException::fromRequest($request, $subResponse->exception));
         }
 
         return new ConversionResponse(
