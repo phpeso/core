@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 use ValueError;
 
 #[CoversClass(Decimal::class)]
-class DecimalTypeTest extends TestCase
+final class DecimalTypeTest extends TestCase
 {
     public function testAcceptsString(): void
     {

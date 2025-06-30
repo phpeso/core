@@ -7,7 +7,7 @@ namespace Peso\Core\Tests\Requests;
 use Peso\Core\Requests\CurrentExchangeRateRequest;
 use PHPUnit\Framework\TestCase;
 
-class CurrentExchangeRateRequestTest extends TestCase
+final class CurrentExchangeRateRequestTest extends TestCase
 {
     public function testInvert(): void
     {

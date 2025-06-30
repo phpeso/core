@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 use stdClass;
 
 // Cover everything it touches
-class NullServiceTest extends TestCase
+final class NullServiceTest extends TestCase
 {
     public function testSupportsNothing(): void
     {
@@ -27,7 +27,7 @@ class NullServiceTest extends TestCase
         self::assertInstanceOf(RequestNotSupportedException::class, $error->exception);
         self::assertEquals(
             'Unsupported request type: "Peso\Core\Requests\CurrentExchangeRateRequest"',
-            $error->exception->getMessage()
+            $error->exception->getMessage(),
         );
 
         $request = new HistoricalExchangeRateRequest('EUR', 'USD', Date::today());
@@ -37,7 +37,7 @@ class NullServiceTest extends TestCase
         self::assertInstanceOf(RequestNotSupportedException::class, $error->exception);
         self::assertEquals(
             'Unsupported request type: "Peso\Core\Requests\HistoricalExchangeRateRequest"',
-            $error->exception->getMessage()
+            $error->exception->getMessage(),
         );
 
         $request = new stdClass();

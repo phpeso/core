@@ -7,7 +7,7 @@ namespace Peso\Core\Tests\Helpers;
 use Peso\Core\Helpers\BcMathCalculator;
 use Peso\Core\Helpers\CalculatorInterface;
 
-class BcMathCalculatorTest extends CalculatorTestTemplate
+final class BcMathCalculatorTest extends CalculatorTestTemplate
 {
     protected function setUp(): void
     {

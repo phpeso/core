@@ -42,14 +42,14 @@ final readonly class ArrayService implements ExchangeRateServiceInterface
                 => isset($this->currentRates[$request->baseCurrency][$request->quoteCurrency]) ?
                     new ExchangeRateResponse(
                         Decimal::init($this->currentRates[$request->baseCurrency][$request->quoteCurrency]),
-                        $this->currentDate
+                        $this->currentDate,
                     ) :
                     new ErrorResponse(ExchangeRateNotFoundException::fromRequest($request)),
             $request instanceof HistoricalExchangeRateRequest
                 => isset($this->historicalRates[$request->date->toString()][$request->baseCurrency][$request->quoteCurrency]) ?
                     new ExchangeRateResponse(
                         Decimal::init($this->historicalRates[$request->date->toString()][$request->baseCurrency][$request->quoteCurrency]),
-                        $request->date
+                        $request->date,
                     ) :
                     new ErrorResponse(ExchangeRateNotFoundException::fromRequest($request)),
             default

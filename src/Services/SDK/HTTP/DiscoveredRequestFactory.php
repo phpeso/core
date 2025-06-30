@@ -19,7 +19,7 @@ final readonly class DiscoveredRequestFactory implements RequestFactoryInterface
             // @codeCoverageIgnoreStart
             throw new Error(
                 'HTTP request factory class (PSR-17) implementation not found. ' .
-                'Please pass an instance of HTTP request factory manually or install php-http/discovery.'
+                'Please pass an instance of HTTP request factory manually or install php-http/discovery.',
             );
             // @codeCoverageIgnoreEnd
         }

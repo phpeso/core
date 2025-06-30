@@ -15,7 +15,7 @@ final class ExchangeRateNotFoundException extends PesoResponseException
 {
     public static function fromRequest(
         CurrentExchangeRateRequest|HistoricalExchangeRateRequest $request,
-        Throwable|null $previous = null
+        Throwable|null $previous = null,
     ): self {
         return new self(match (true) {
             $request instanceof CurrentExchangeRateRequest => \sprintf(
@@ -33,4 +33,6 @@ final class ExchangeRateNotFoundException extends PesoResponseException
     }
 }
 
+// phpcs:disable PSR1.Files.SideEffects.FoundWithSymbols
+// load alias
 class_exists(ConversionRateNotFoundException::class);

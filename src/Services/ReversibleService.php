@@ -33,7 +33,7 @@ final readonly class ReversibleService implements ExchangeRateServiceInterface
                 if ($invertedResult instanceof ExchangeRateResponse) {
                     return new ExchangeRateResponse(
                         Calculator::instance()->invert($invertedResult->rate),
-                        $invertedResult->date
+                        $invertedResult->date,
                     );
                 }
             }

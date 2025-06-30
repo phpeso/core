@@ -16,7 +16,7 @@ final readonly class ChainService implements ExchangeRateServiceInterface
     private array $services;
 
     public function __construct(
-        ExchangeRateServiceInterface ...$services
+        ExchangeRateServiceInterface ...$services,
     ) {
         if ($services === []) {
             throw new ValueError('List of services must be non-empty');

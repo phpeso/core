@@ -19,7 +19,7 @@ final readonly class DiscoveredUriFactory implements UriFactoryInterface
             // @codeCoverageIgnoreStart
             throw new Error(
                 'HTTP URI factory class (PSR-17) implementation not found. ' .
-                'Please pass an instance of HTTP URI factory manually or install php-http/discovery.'
+                'Please pass an instance of HTTP URI factory manually or install php-http/discovery.',
             );
             // @codeCoverageIgnoreEnd
         }

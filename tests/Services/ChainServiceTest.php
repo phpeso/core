@@ -21,7 +21,7 @@ use ValueError;
 
 #[CoversClass(ChainService::class)]
 #[CoversClass(NoSuitableServiceFoundException::class)]
-class ChainServiceTest extends TestCase
+final class ChainServiceTest extends TestCase
 {
     public function testFound(): void
     {

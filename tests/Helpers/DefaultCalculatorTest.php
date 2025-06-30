@@ -10,7 +10,7 @@ use Peso\Core\Helpers\Calculator;
 use Peso\Core\Helpers\CalculatorInterface;
 use PHPUnit\Framework\TestCase;
 
-class DefaultCalculatorTest extends TestCase
+final class DefaultCalculatorTest extends TestCase
 {
     public function testInstance(): void
     {

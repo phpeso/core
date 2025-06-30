@@ -20,7 +20,7 @@ final readonly class DiscoveredHttpClient implements ClientInterface
             // @codeCoverageIgnoreStart
             throw new Error(
                 'HTTP client class (PSR-18) implementation not found. ' .
-                'Please pass an instance of HTTP client manually or install php-http/discovery.'
+                'Please pass an instance of HTTP client manually or install php-http/discovery.',
             );
             // @codeCoverageIgnoreEnd
         }

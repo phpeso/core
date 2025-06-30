@@ -22,7 +22,7 @@ use stdClass;
 #[CoversClass(ReversibleService::class)]
 #[CoversClass(CurrentExchangeRateRequest::class)] // inversion
 #[CoversClass(HistoricalExchangeRateRequest::class)] // inversion
-class ReversibleServiceTest extends TestCase
+final class ReversibleServiceTest extends TestCase
 {
     public function testSupport(): void
     {

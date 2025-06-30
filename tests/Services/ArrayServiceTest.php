@@ -18,7 +18,7 @@ use PHPUnit\Framework\TestCase;
 use stdClass;
 
 // Cover everything it touches
-class ArrayServiceTest extends TestCase
+final class ArrayServiceTest extends TestCase
 {
     public function testCurrent(): void
     {

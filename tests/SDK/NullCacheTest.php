@@ -7,7 +7,7 @@ namespace Peso\Core\Tests\SDK;
 use Peso\Core\Services\SDK\Cache\NullCache;
 use PHPUnit\Framework\TestCase;
 
-class NullCacheTest extends TestCase
+final class NullCacheTest extends TestCase
 {
     public function testNullCache(): void
     {

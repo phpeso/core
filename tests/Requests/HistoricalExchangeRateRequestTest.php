@@ -8,7 +8,7 @@ use Arokettu\Date\Date;
 use Peso\Core\Requests\HistoricalExchangeRateRequest;
 use PHPUnit\Framework\TestCase;
 
-class HistoricalExchangeRateRequestTest extends TestCase
+final class HistoricalExchangeRateRequestTest extends TestCase
 {
     public function testInvert(): void
     {

@@ -22,7 +22,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
 
-class PsrDiscoveryTest extends TestCase
+final class PsrDiscoveryTest extends TestCase
 {
     private array $strategies;
 

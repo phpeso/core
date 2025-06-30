@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 use RuntimeException;
 use ValueError;
 
-class HttpFailureExceptionTest extends TestCase
+final class HttpFailureExceptionTest extends TestCase
 {
     public function testCreateDirectly(): void
     {
@@ -47,7 +47,7 @@ class HttpFailureExceptionTest extends TestCase
         $e = HttpFailureException::fromResponse($request, $response, $previous);
         self::assertEquals(
             'HTTP error 404. Response is "<invalid UTF-8> (please inspect the $response object)"',
-            $e->getMessage()
+            $e->getMessage(),
         );
         self::assertEquals(404, $e->getCode());
         self::assertInstanceOf(LogicException::class, $e->getPrevious());

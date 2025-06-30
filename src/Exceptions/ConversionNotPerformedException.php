@@ -12,7 +12,7 @@ final class ConversionNotPerformedException extends PesoResponseException
 {
     public static function fromRequest(
         CurrentConversionRequest|HistoricalConversionRequest $request,
-        Throwable|null $previous = null
+        Throwable|null $previous = null,
     ): self {
         return new self(match (true) {
             $request instanceof CurrentConversionRequest => \sprintf(

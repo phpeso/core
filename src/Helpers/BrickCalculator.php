@@ -33,8 +33,8 @@ final readonly class BrickCalculator implements CalculatorInterface
             BigDecimal::one()->dividedBy(
                 $value,
                 $scale + 10,
-                BrickRoundingMode::HALF_EVEN
-            )
+                BrickRoundingMode::HALF_EVEN,
+            ),
         );
     }
 

@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 use stdClass;
 
 #[CoversClass(IndirectExchangeService::class)]
-class IndirectExchangeServiceTest extends TestCase
+final class IndirectExchangeServiceTest extends TestCase
 {
     public function testSupport(): void
     {
@@ -158,11 +158,11 @@ class IndirectExchangeServiceTest extends TestCase
     {
         $service1 = new ArrayService(
             currentRates: ['EUR' => ['USD' => '1.125']],
-            currentDate: Calendar::parse('2025-06-13')
+            currentDate: Calendar::parse('2025-06-13'),
         );
         $service2 = new ArrayService(
             currentRates: ['CZK' => ['EUR' => '0.04']],
-            currentDate: Calendar::parse('2025-06-20')
+            currentDate: Calendar::parse('2025-06-20'),
         );
         $service = new IndirectExchangeService(new ChainService($service1, $service2), 'EUR');
 
