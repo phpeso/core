@@ -22,7 +22,7 @@ final readonly class ChainService implements PesoServiceInterface
         if ($services === []) {
             throw new ValueError('List of services must be non-empty');
         }
-        $this->services = $services;
+        $this->services = array_values($services);
     }
 
     #[Override]
