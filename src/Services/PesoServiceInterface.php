@@ -16,9 +16,9 @@ use Peso\Core\Responses\ExchangeRateResponse;
 interface PesoServiceInterface
 {
     /**
-     * @template T of object
-     * @param T $request
-     * @return (
+     * @psalm-template T of object
+     * @psalm-param T $request
+     * @psalm-return (
      *      T is CurrentExchangeRateRequest ? ExchangeRateResponse|ErrorResponse : (
      *      T is HistoricalExchangeRateRequest ? ExchangeRateResponse|ErrorResponse : (
      *      T is CurrentConversionRequest ? ConversionResponse|ErrorResponse : (
