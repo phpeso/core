@@ -87,8 +87,6 @@
 
 * Add license declaration
 
-Changelog for earlier alpha releases is in CHANGELOG.md
-
 ### 0.1.5
 
 (untagged; 5aed5cb54121d35fcb1f6c9e17cfdf78af6bff60)
