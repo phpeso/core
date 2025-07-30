@@ -2,9 +2,12 @@
 
 ## 1.x
 
-### next
+### 1.3.0
+
+*Jul 30, 2025*
 
 * CallbackService
+* Fixed ReversibleService to reverse on any ErrorResponse
 
 ### 1.2.0
 
