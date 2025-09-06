@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @copyright 2025 Anton Smirnov
+ * @license MIT https://spdx.org/licenses/MIT.html
+ */
+
 declare(strict_types=1);
 
 namespace Peso\Core\Tests\Services;
@@ -119,7 +124,7 @@ final class BlackHoleServiceTest extends TestCase
             CurrentConversionRequest::class,
         ), $response->exception->getMessage());
 
-        $response = $service->send(new HistoricalConversionRequest(Decimal::init(1), 'PHP', 'USD',$today));
+        $response = $service->send(new HistoricalConversionRequest(Decimal::init(1), 'PHP', 'USD', $today));
         self::assertInstanceOf(ErrorResponse::class, $response);
         self::assertInstanceOf(ConversionNotPerformedException::class, $response->exception);
         self::assertEquals(
