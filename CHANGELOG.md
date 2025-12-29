@@ -2,6 +2,10 @@
 
 ## 1.x
 
+### next
+
+* BlackHoleService moved to peso/debug 
+
 ### 1.4.1
 
 *Sep 6, 2025*

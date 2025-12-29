@@ -19,6 +19,9 @@ use Peso\Core\Requests\HistoricalConversionRequest;
 use Peso\Core\Requests\HistoricalExchangeRateRequest;
 use Peso\Core\Responses\ErrorResponse;
 
+/**
+ * @deprecated Use Peso\Debug\Services\BlackHoleService from peso/debug
+ */
 final readonly class BlackHoleService implements PesoServiceInterface
 {
     /**
