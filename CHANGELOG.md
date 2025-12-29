@@ -2,7 +2,9 @@
 
 ## 1.x
 
-### next
+### 1.4.2
+
+*Dec 29, 2025*
 
 * BlackHoleService moved to peso/debug
 * Declared supported PSR packages in the "conflict" section
