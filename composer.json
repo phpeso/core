@@ -48,8 +48,7 @@
         "psr/simple-cache": "^2 || ^3",
         "psy/psysh": "^0.12.8",
         "sandfox.dev/code-standard": "^1.2025.08.31",
-        "squizlabs/php_codesniffer": "*",
-        "vimeo/psalm": "^6.12"
+        "squizlabs/php_codesniffer": "*"
     },
     "conflict": {
         "psr/http-client": "<1 || >=2",
