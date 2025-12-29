@@ -4,7 +4,9 @@
 
 ### next
 
-* BlackHoleService moved to peso/debug 
+* BlackHoleService moved to peso/debug
+* Declared supported PSR packages in the "conflict" section
+  * Declared that the package is not compatible with psr/simple-cache v1
 
 ### 1.4.1
 
