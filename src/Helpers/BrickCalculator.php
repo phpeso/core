@@ -38,7 +38,7 @@ final readonly class BrickCalculator implements CalculatorInterface
             BigDecimal::one()->dividedBy(
                 $value,
                 $scale + 10,
-                BrickRoundingMode::HALF_EVEN,
+                BRICK_HALF_EVEN,
             ),
         );
     }
@@ -46,6 +46,13 @@ final readonly class BrickCalculator implements CalculatorInterface
     public function round(Decimal $x, int $precision): Decimal
     {
         $value = BigDecimal::of($x->value);
-        return Decimal::init($value->toScale($precision, BrickRoundingMode::HALF_EVEN));
+        return Decimal::init($value->toScale($precision, BRICK_HALF_EVEN));
     }
 }
+
+\define(
+    __NAMESPACE__ . '\\BRICK_HALF_EVEN',
+    \defined(BrickRoundingMode::class . '::HalfEven') ?
+        BrickRoundingMode::HalfEven : // < 0.14
+        BrickRoundingMode::HALF_EVEN, // >= 0.14, removed since 0.15
+);
