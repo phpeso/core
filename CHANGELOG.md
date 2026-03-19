@@ -2,6 +2,12 @@
 
 ## 1.x
 
+### 1.4.3
+
+*Mar 19, 2026*
+
+* Enable support for brick/math 0.15-0.17
+
 ### 1.4.2
 
 *Dec 29, 2025*
