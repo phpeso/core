@@ -53,6 +53,6 @@ final readonly class BrickCalculator implements CalculatorInterface
 \define(
     __NAMESPACE__ . '\\BRICK_HALF_EVEN',
     \defined(BrickRoundingMode::class . '::HalfEven') ?
-        BrickRoundingMode::HalfEven : // < 0.14
-        BrickRoundingMode::HALF_EVEN, // >= 0.14, removed since 0.15
+        BrickRoundingMode::HalfEven : // >= 0.14
+        BrickRoundingMode::HALF_EVEN, // < 0.14, removed since 0.15
 );
