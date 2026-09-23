@@ -2,6 +2,12 @@
 
 ## 1.x
 
+### 1.4.7
+
+*Sep 23, 2026*
+
+* Allow brick/math 1.x, drop support for brick/math < 0.14.2
+
 ### 1.4.6
 
 *Aug 29, 2026*
