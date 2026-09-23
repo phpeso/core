@@ -10,7 +10,7 @@ declare(strict_types=1);
 namespace Peso\Core\Helpers;
 
 use Brick\Math\BigDecimal;
-use Brick\Math\RoundingMode as BrickRoundingMode;
+use Brick\Math\RoundingMode;
 use Peso\Core\Types\Decimal;
 
 /**
@@ -38,7 +38,7 @@ final readonly class BrickCalculator implements CalculatorInterface
             BigDecimal::one()->dividedBy(
                 $value,
                 $scale + 10,
-                BRICK_HALF_EVEN,
+                RoundingMode::HalfEven,
             ),
         );
     }
@@ -46,13 +46,6 @@ final readonly class BrickCalculator implements CalculatorInterface
     public function round(Decimal $x, int $precision): Decimal
     {
         $value = BigDecimal::of($x->value);
-        return Decimal::init($value->toScale($precision, BRICK_HALF_EVEN));
+        return Decimal::init($value->toScale($precision, RoundingMode::HalfEven));
     }
 }
-
-\define(
-    __NAMESPACE__ . '\\BRICK_HALF_EVEN',
-    \defined(BrickRoundingMode::class . '::HalfEven') ?
-        BrickRoundingMode::HalfEven : // >= 0.14
-        BrickRoundingMode::HALF_EVEN, // < 0.14, removed since 0.15
-);
